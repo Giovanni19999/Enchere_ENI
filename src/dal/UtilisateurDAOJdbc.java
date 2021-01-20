@@ -54,19 +54,27 @@ public class UtilisateurDAOJdbc {
 		
 		String sql = "SELECT * from UTILISATEURS WHERE no_utilisateur = ? ";
 		BOUtilisateur c = null;
+	
+			Connection cnx = getConnection();
+			PreparedStatement stmt = cnx.prepareStatement(sql);
+	
+			stmt.setInt(1,id);
+			ResultSet rs = stmt.executeQuery();
 
-		Connection cnx = getConnection();
-		PreparedStatement stmt = cnx.prepareStatement(sql);
 
-		stmt.setInt(1,id);
-		ResultSet rs = stmt.executeQuery();
-
-
-		rs.next();
-		c = new BOUtilisateur();
-		c.setMdp(rs.getString("mot_de_passe"));
-		c.setPseudo(rs.getString("pseudo"));
-		c.setEmail(rs.getString("email"));
+			rs.next();
+			c = new BOUtilisateur();
+			c.setMdp(rs.getString("mot_de_passe"));
+			c.setPseudo(rs.getString("pseudo"));
+			c.setEmail(rs.getString("email"));
+			c.setNom(rs.getString("nom"));
+			c.setPrenom(rs.getString("prenom"));
+			c.setTelephone(rs.getString("telephone"));
+			c.setRue(rs.getString("rue"));
+			c.setCodePostal(rs.getString("code_postal"));
+			c.setVille(rs.getString("ville"));
+			c.setCredit(rs.getInt("credit"));
+			c.setAdminstrateur(rs.getBoolean("administrateur"));
 		return c;
 
 	}
@@ -87,7 +95,14 @@ public class UtilisateurDAOJdbc {
 				c.setMdp(rs.getString("mot_de_passe"));
 				c.setPseudo(rs.getString("pseudo"));
 				c.setEmail(rs.getString("email"));
-
+				c.setNom(rs.getString("nom"));
+				c.setPrenom(rs.getString("prenom"));
+				c.setTelephone(rs.getString("telephone"));
+				c.setRue(rs.getString("rue"));
+				c.setCodePostal(rs.getString("code_postal"));
+				c.setVille(rs.getString("ville"));
+				c.setCredit(rs.getInt("credit"));
+				c.setAdminstrateur(rs.getBoolean("administrateur"));
 			
 			return c;
 		}
@@ -109,10 +124,22 @@ public class UtilisateurDAOJdbc {
 				c.setMdp(rs.getString("mot_de_passe"));
 				c.setPseudo(rs.getString("pseudo"));
 				c.setEmail(rs.getString("email"));
+				c.setNom(rs.getString("nom"));
+				c.setPrenom(rs.getString("prenom"));
+				c.setTelephone(rs.getString("telephone"));
+				c.setRue(rs.getString("rue"));
+				c.setCodePostal(rs.getString("code_postal"));
+				c.setVille(rs.getString("ville"));
+				c.setCredit(rs.getInt("credit"));
+				c.setAdminstrateur(rs.getBoolean("administrateur"));
+					
+				
+				
 
 			
 			return c;
 		}
+		
 
 	}
 
