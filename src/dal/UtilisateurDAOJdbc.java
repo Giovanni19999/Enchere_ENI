@@ -75,6 +75,8 @@ public class UtilisateurDAOJdbc {
 			c.setVille(rs.getString("ville"));
 			c.setCredit(rs.getInt("credit"));
 			c.setAdminstrateur(rs.getBoolean("administrateur"));
+			c.setNoUtilisateur(rs.getInt("no_utilisateur"));
+			
 		return c;
 
 	}
@@ -103,7 +105,8 @@ public class UtilisateurDAOJdbc {
 				c.setVille(rs.getString("ville"));
 				c.setCredit(rs.getInt("credit"));
 				c.setAdminstrateur(rs.getBoolean("administrateur"));
-			
+				c.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				
 			return c;
 		}
 
@@ -132,11 +135,8 @@ public class UtilisateurDAOJdbc {
 				c.setVille(rs.getString("ville"));
 				c.setCredit(rs.getInt("credit"));
 				c.setAdminstrateur(rs.getBoolean("administrateur"));
-					
-				
-				
+				c.setNoUtilisateur(rs.getInt("no_utilisateur"));	
 
-			
 			return c;
 		}
 		

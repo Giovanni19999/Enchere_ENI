@@ -52,8 +52,8 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 	
 			session.setAttribute("utilisateur", utilisateur);
 	
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Accueil.jsp");
-			if(rd != null) {rd.forward(request, response);}
+			getServletContext().getRequestDispatcher("/retour/encheres").forward(request, response);
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 			

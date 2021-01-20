@@ -13,7 +13,7 @@ import javax.websocket.Session;
 /**
  * Servlet implementation class ServletRetourAccueil
  */
-@WebServlet("/retour/accueil")
+@WebServlet("/retour/encheres")
 public class ServletRetourAccueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,7 +29,7 @@ public class ServletRetourAccueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Accueil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Encheres.jsp");
 		if(rd != null) {rd.forward(request, response);}
 	}
 

@@ -11,7 +11,7 @@ public class ManagerUtilisateur {
 	
 		BOUtilisateur base;
 		UtilisateurDAOJdbc c = new UtilisateurDAOJdbc();
-		Exception eConnection = null;
+		Exception connexion = null;
 		
 		if (id.contains("@")) {			
 			
@@ -19,7 +19,7 @@ public class ManagerUtilisateur {
 				base=c.selectByEmail(id);
 				
 				if (!mdp.equals(base.getMdp())) {
-					throw eConnection;
+					throw connexion;
 				}
 			}catch (Exception e){
 				throw new Exception("Email ou mot de passe incorrect");
@@ -29,17 +29,12 @@ public class ManagerUtilisateur {
 				base=c.selectByPseudo(id);
 				
 				if (!mdp.equals(base.getMdp())) {
-					throw eConnection;
+					throw connexion;
 				}
 			}catch (Exception e){
 				throw new Exception("Pseudo ou mot de passe incorrect");
 			}
-			
 		}
-		
 		return base;
 	}
-	
-	
-	
 }
