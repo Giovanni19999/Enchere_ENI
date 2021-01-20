@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,13 +8,19 @@
 <title>Navigation</title>
 </head>
 <body>
-	
-	<form action="${pageContext.request.contextPath}/connexion/utilisateur" method="get">
-		<input type="submit" name="connexion" value="Connexion">
+
+	<!-- Si l'utilisateur n'est pas connecté, on fais apparaitre le bouton connexion, sinon on affiche le pseudo et on cache le bouton connexion -->
+	<c:choose> 
+		<c:when test="${empty sessionScope.pseudo}"> <!-- s'il ne trouve pas le pseudo (non connecté) -->
+			<form action="${pageContext.request.contextPath}/connexion/utilisateur" method="get"> <!-- on fais apparaitre le bouton connexion -->
+				<input type="submit" name="connexion" value="Connexion">
+			</form>
+		</c:when>
 		
-	</form>
-	
-	<c:if test="${!empty sessionScope.pseudo}"> ${sessionScope.pseudo} </c:if>
+		<c:otherwise> <!-- Sinon -->
+			${sessionScope.pseudo} <!-- On affiche le pseudo et on cache le bouton connexion -->
+		</c:otherwise>
+	</c:choose>
 	
 </body>
 </html>
