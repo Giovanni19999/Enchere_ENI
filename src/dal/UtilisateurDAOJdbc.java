@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
-import bo.BOConnection;
+import bo.BOUtilisateur;
 
 
 
@@ -25,19 +25,19 @@ public class UtilisateurDAOJdbc {
 	}
 	private static final String INSERT= "insert into (identifiant, mdp) values(?,?)";
 
-	public void insert (BOConnection connexion) {
+	public void insert (BOUtilisateur connexion) {
 		if (connexion !=null) {
 
 
 			try {
 				Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-				pstmt.setString(1, connexion.getNom());
+				pstmt.setString(1, connexion.getPseudo());
 				pstmt.setString(2, connexion.getMdp());
 				pstmt.executeUpdate();
 				ResultSet rs = pstmt.getGeneratedKeys();
 				if (rs.next()) {
-					connexion.setNom(rs.getString(1));
+					connexion.setPseudo(rs.getString(1));
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -49,11 +49,11 @@ public class UtilisateurDAOJdbc {
 		
 	}
 
-	public BOConnection selectById(int id) throws Exception {
+	public BOUtilisateur selectById(int id) throws Exception {
 		
 		
 		String sql = "SELECT * from UTILISATEURS WHERE no_utilisateur = ? ";
-		BOConnection c = null;
+		BOUtilisateur c = null;
 
 		Connection cnx = getConnection();
 		PreparedStatement stmt = cnx.prepareStatement(sql);
@@ -63,16 +63,16 @@ public class UtilisateurDAOJdbc {
 
 
 		rs.next();
-		c = new BOConnection();
+		c = new BOUtilisateur();
 		c.setMdp(rs.getString("mot_de_passe"));
-		c.setNom(rs.getString("pseudo"));
+		c.setPseudo(rs.getString("pseudo"));
 		c.setEmail(rs.getString("email"));
 		return c;
 
 	}
-		public BOConnection selectByPseudo(String pseudo) throws Exception{
+		public BOUtilisateur selectByPseudo(String pseudo) throws Exception{
 			String sql = "SELECT * from UTILISATEURS WHERE pseudo = ? ";
-			BOConnection c = null;
+			BOUtilisateur c = null;
 
 			
 				Connection cnx = getConnection();
@@ -83,18 +83,18 @@ public class UtilisateurDAOJdbc {
 
 
 				rs.next();
-				c = new BOConnection();
+				c = new BOUtilisateur();
 				c.setMdp(rs.getString("mot_de_passe"));
-				c.setNom(rs.getString("pseudo"));
+				c.setPseudo(rs.getString("pseudo"));
 				c.setEmail(rs.getString("email"));
 
 			
 			return c;
 		}
 
-		public BOConnection selectByEmail(String email) throws Exception{
+		public BOUtilisateur selectByEmail(String email) throws Exception{
 			String sql = "SELECT * from UTILISATEURS WHERE email = ? ";
-			BOConnection c = null;
+			BOUtilisateur c = null;
 
 			
 				Connection cnx = getConnection();
@@ -105,9 +105,9 @@ public class UtilisateurDAOJdbc {
 
 
 				rs.next();
-				c = new BOConnection();
+				c = new BOUtilisateur();
 				c.setMdp(rs.getString("mot_de_passe"));
-				c.setNom(rs.getString("pseudo"));
+				c.setPseudo(rs.getString("pseudo"));
 				c.setEmail(rs.getString("email"));
 
 			
