@@ -65,7 +65,7 @@ public class UtilisateurDAOJdbc {
 		rs.next();
 		c = new BOConnection();
 		c.setMdp(rs.getString("mot_de_passe"));
-		c.setNom(rs.getString("nom"));
+		c.setNom(rs.getString("pseudo"));
 		c.setEmail(rs.getString("email"));
 		return c;
 
@@ -85,7 +85,7 @@ public class UtilisateurDAOJdbc {
 				rs.next();
 				c = new BOConnection();
 				c.setMdp(rs.getString("mot_de_passe"));
-				c.setNom(rs.getString("nom"));
+				c.setNom(rs.getString("pseudo"));
 				c.setEmail(rs.getString("email"));
 
 			
@@ -107,7 +107,7 @@ public class UtilisateurDAOJdbc {
 				rs.next();
 				c = new BOConnection();
 				c.setMdp(rs.getString("mot_de_passe"));
-				c.setNom(rs.getString("nom"));
+				c.setNom(rs.getString("pseudo"));
 				c.setEmail(rs.getString("email"));
 
 			
