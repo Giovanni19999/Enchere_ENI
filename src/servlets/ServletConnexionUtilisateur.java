@@ -47,14 +47,20 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 		
 		try {
 			session.setAttribute("pseudo", connexionManager.validationConnection(request));
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Accueil.jsp");
+			if(rd != null) {rd.forward(request, response);}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.err.println(e.getMessage());
+			
+			request.setAttribute("erreur", e.getMessage());
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/FormulaireDeConnexion.jsp");
+			if(rd != null) {rd.forward(request, response);}
 		}
 		
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Accueil.jsp");
-		if(rd != null) {rd.forward(request, response);}
 	}
 
 }
