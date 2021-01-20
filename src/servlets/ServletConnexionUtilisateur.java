@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import managers.ManagerConnection;
+import bo.BOUtilisateur;
+import managers.ManagerUtilisateur;
 
 /**
  * Servlet implementation class ServletConnexionUtilisateur
@@ -42,17 +43,18 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ManagerConnection connexionManager = new ManagerConnection();
+		ManagerUtilisateur connexionManager = new ManagerUtilisateur();
 		HttpSession session = request.getSession();
 		
 		try {
-			session.setAttribute("pseudo", connexionManager.validationConnection(request));
-			
+			BOUtilisateur utilisateur = null;
+			utilisateur = connexionManager.validationConnection(request.getParameter("identifiant"), request.getParameter("mdp"));
+	
+			session.setAttribute("utilisateur", utilisateur);
+	
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Accueil.jsp");
 			if(rd != null) {rd.forward(request, response);}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			System.err.println(e.getMessage());
 			
 			request.setAttribute("erreur", e.getMessage());

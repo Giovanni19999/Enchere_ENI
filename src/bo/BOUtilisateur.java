@@ -1,27 +1,26 @@
 package bo;
-
-public class BOConnection {
+	//Utilisateur ou user
+public class BOUtilisateur {
 	
 	private String nom;
 	private String email;
 	private String mdp;
+	private String pseudo;
 	
 	
 	
-	
-	public BOConnection() {
+	public BOUtilisateur() {
 		super();
 	}
 	
 	
 	
 	
-	public BOConnection(String nom, String mdp) {
+	public BOUtilisateur(String pseudo, String mdp) {
 		super();
-		setNom(nom);
+		setPseudo(pseudo);
 		setMdp(mdp);
 	}
-
 
 
 	public String getNom() {
@@ -42,7 +41,20 @@ public class BOConnection {
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
-	
+	public String getPseudo() {
+		return pseudo;
+	}
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "BOUtilisateur [nom=" + nom + ", email=" + email + ", mdp=" + mdp + ", pseudo=" + pseudo + "]";
+	}
 	
 	
 	

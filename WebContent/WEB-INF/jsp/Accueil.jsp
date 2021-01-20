@@ -8,12 +8,10 @@
 <title>Accueil</title>
 </head>
 <body>
-<header class="navigationHader">
-	<nav>
+
 		<%@ include file="/WEB-INF/jsp/fragments/Navigation.jspf" %>
 		<%System.out.println(session.getAttribute("pseudo")); %>
-	</nav>
-</header>
+
 
 	<h1>Accueil</h1>
 	
