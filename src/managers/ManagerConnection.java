@@ -33,7 +33,7 @@ public class ManagerConnection {
 					throw eConnection;
 				}
 			}catch (Exception e){
-				throw new Exception("Erreur de connection");
+				throw new Exception("Email ou mot de passe incorrect");
 			}
 		}else {
 			connection=new BOConnection(id, mdp);
@@ -46,7 +46,7 @@ public class ManagerConnection {
 					throw eConnection;
 				}
 			}catch (Exception e){
-				throw new Exception("Erreur de connection");
+				throw new Exception("Pseudo ou mot de passe incorrect");
 			}
 			
 		}
