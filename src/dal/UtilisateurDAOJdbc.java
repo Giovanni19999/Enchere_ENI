@@ -139,7 +139,7 @@ public class UtilisateurDAOJdbc {
 
 			return c;
 		}
-<<<<<<< HEAD
+
 	
 		public String deleteById() throws SQLException {
 			String sql = "DELETE from UTILISATEURS WHERE no_utilisateur = ? ";
@@ -155,7 +155,7 @@ public class UtilisateurDAOJdbc {
 			
 			return d;
 		}
-=======
+
 		
 
 
@@ -177,7 +177,7 @@ public class UtilisateurDAOJdbc {
 		stmt.setString(9,user.getVille());
 		stmt.setInt(10,user.getNoUtilisateur());
 		stmt.executeUpdate();
->>>>>>> branch 'master' of https://github.com/Giovanni19999/Enchere_ENI.git
+
 	}
 
 }
