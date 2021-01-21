@@ -43,6 +43,8 @@ public class ServletModifierProfil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BOUtilisateur utilisateur;
 		HttpSession session = request.getSession();
+		ManagerUtilisateur mngUtilisateur = new ManagerUtilisateur();
+		
 		utilisateur = new BOUtilisateur(
 				request.getParameter("nom"),
 				request.getParameter("prenom"),
@@ -53,11 +55,10 @@ public class ServletModifierProfil extends HttpServlet {
 				request.getParameter("rue"),
 				request.getParameter("codepostal").toString(),
 				request.getParameter("ville"));
-	
-		ManagerUtilisateur mngUtilisateur = new ManagerUtilisateur();
-		
+
 		try {
 			utilisateur = mngUtilisateur.modifierUtillisateur((BOUtilisateur)session.getAttribute("utilisateur"), utilisateur, request.getParameter("emailconfirmation"), request.getParameter("mdpconfirmation"));
+			
 			
 			session.setAttribute("utilisateur", utilisateur);
 			
