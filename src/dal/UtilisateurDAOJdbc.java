@@ -141,6 +141,25 @@ public class UtilisateurDAOJdbc {
 		}
 		
 
+
+	
+	public void updateById(BOUtilisateur user) throws SQLException {
+		String sql = "UPDATE UTILISATEURS "
+				+ "SET pseudo=?, mot_de_passe=?, nom=?, prenom=?,telephone=?,email=?,rue=?,code_postal=?,ville=?"+
+				"WHERE no_utilisateur=?";
+		Connection cnx = getConnection();
+		PreparedStatement stmt = cnx.prepareStatement(sql);
+		stmt.setString(1,user.getPseudo());
+		stmt.setString(2,user.getMdp());
+		stmt.setString(3,user.getNom());
+		stmt.setString(4,user.getPrenom());
+		stmt.setString(5,user.getTelephone());
+		stmt.setString(6,user.getEmail());
+		stmt.setString(7,user.getRue());
+		stmt.setString(8,user.getCodePostal());
+		stmt.setString(9,user.getVille());
+		stmt.setInt(10,user.getNoUtilisateur());
+		stmt.executeUpdate();
 	}
 
-
+}

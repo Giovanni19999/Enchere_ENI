@@ -1,6 +1,8 @@
 package managers;
 
 
+import java.sql.SQLException;
+
 import bo.BOUtilisateur;
 import dal.UtilisateurDAOJdbc;
 
@@ -39,9 +41,10 @@ public class ManagerUtilisateur {
 	}
 	
 	
-	public void modifierUtillisateur (BOUtilisateur preMod, BOUtilisateur postMod) {
+	public void modifierUtillisateur (BOUtilisateur preMod, BOUtilisateur postMod) throws SQLException {
 		if (!preMod.equals(postMod)) {
-			/*dal update by id*/
+			UtilisateurDAOJdbc c = new UtilisateurDAOJdbc();
+			c.updateById(postMod);
 		}
 	}
 	
