@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -52,7 +53,9 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 	
 			session.setAttribute("utilisateur", utilisateur);
 	
-			getServletContext().getRequestDispatcher("/retour/encheres").forward(request, response);
+			//getServletContext().getRequestDispatcher("/retour/encheres").forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Encheres.jsp");
+			if(rd != null) {rd.forward(request, response);}
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());

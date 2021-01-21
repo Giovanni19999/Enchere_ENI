@@ -146,7 +146,7 @@ public class UtilisateurDAOJdbc {
 	public void updateById(BOUtilisateur user) throws SQLException {
 		String sql = "UPDATE UTILISATEURS "
 				+ "SET pseudo=?, mot_de_passe=?, nom=?, prenom=?,telephone=?,email=?,rue=?,code_postal=?,ville=?"+
-				"WHERE no_utilisateur=?";
+				" WHERE no_utilisateur=?";
 		Connection cnx = getConnection();
 		PreparedStatement stmt = cnx.prepareStatement(sql);
 		stmt.setString(1,user.getPseudo());

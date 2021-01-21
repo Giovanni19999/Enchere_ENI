@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<style><%@include file="/css/header.css"%></style>
 <head>
 <meta charset="UTF-8">
 <title>Navigation</title>
@@ -21,6 +22,16 @@
 				</c:when>
 
 				<c:otherwise> <!-- Sinon -->
+					<form action="${pageContext.request.contextPath}/profil/afficher" method="get">
+						<!-- on fais apparaitre le bouton connexion -->
+						<input type="submit" name="afficherprofil" value="Mon profil">
+						<a href="${pageContext.request.contextPath}/retour/encheres"><input type="button" name="accueil" value="Accueil"></a>
+					</form>
+					
+					<form action="${pageContext.request.contextPath}/retour/encheres" method="post">
+						<input type="submit" name="deconnexion" value="Se déconnecter">
+					</form>
+					
 					${sessionScope.utilisateur.pseudo} <!-- On affiche le pseudo et on cache le bouton connexion -->
 				</c:otherwise>
 			</c:choose>

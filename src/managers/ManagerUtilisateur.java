@@ -41,7 +41,7 @@ public class ManagerUtilisateur {
 	}
 	
 	
-	public void modifierUtillisateur (BOUtilisateur preMod, BOUtilisateur postMod,String newEmail,String newMdp) throws SQLException{
+	public BOUtilisateur modifierUtillisateur (BOUtilisateur preMod, BOUtilisateur postMod,String newEmail,String newMdp) throws SQLException{
 		
 		
 		if (preMod.getMdp().equals(postMod.getMdp())) {
@@ -73,7 +73,8 @@ public class ManagerUtilisateur {
 				c.updateById(postMod);
 		
 			}
-		}	
+		}
+		return postMod;
 	}
 	
 	public void suprimerUtilisateur (BOUtilisateur user) {

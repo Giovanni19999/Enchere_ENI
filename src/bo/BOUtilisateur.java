@@ -173,6 +173,23 @@ public class BOUtilisateur {
 		setPseudo(pseudo);
 		setMdp(mdp);
 	}
+	
+	
+
+	public BOUtilisateur(String nom, String prenom, String email, String mdp, String pseudo,
+			String telephone, String rue, String codePostal, String ville) {
+		super();
+		setNom(nom);
+		setPrenom(prenom);
+		setEmail(email);
+		setPseudo(pseudo);
+		setMdp(mdp);
+		setTelephone(telephone);
+		setRue(rue);
+		setCodePostal(codePostal);
+		setVille(ville);
+	}
+
 
 
 	public String getNom() {

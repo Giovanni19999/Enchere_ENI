@@ -15,8 +15,8 @@
 	
 	<form action="${pageContext.request.contextPath}/connexion/utilisateur" method="post">
 		<ul>
-			<li><input type="text" name="identifiant" placeholder="Pseudo ou Email"><br><br></li>
-			<li><input type="password" name="mdp" placeholder="Mot de passe"><br><br></li>
+			<li>Pseudo ou Email <input type="text" name="identifiant" placeholder="Pseudo ou Email"><br><br></li>
+			<li>Mot de passe <input type="password" name="mdp" placeholder="Mot de passe"><br><br></li>
 			
 			<li><input type="submit" value="Se connecter"></li>
 		</ul>

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<style><%@include file="/css/header.css"%></style>
 <head>
 <meta charset="UTF-8">
 <title>Accueil</title>
@@ -10,7 +9,6 @@
 <body>
 
 		<%@ include file="/WEB-INF/jsp/fragments/Navigation.jspf" %>
-		<%System.out.println(session.getAttribute("pseudo")); %>
 
 
 	<h1>Accueil</h1>
