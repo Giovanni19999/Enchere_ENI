@@ -37,4 +37,27 @@ public class ManagerUtilisateur {
 		}
 		return base;
 	}
+	
+	
+	public void modifierUtillisateur (BOUtilisateur preMod, BOUtilisateur postMod) {
+		if (!preMod.equals(postMod)) {
+			/*dal update by id*/
+		}
+	}
+	
+	public void suprimerUtilisateur (BOUtilisateur user) {
+		/*dal delete by Id*/
+	}
+	
+	
+	
+	
+	
 }
+
+
+
+	
+
+
+
