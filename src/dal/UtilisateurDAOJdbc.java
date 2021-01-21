@@ -139,8 +139,21 @@ public class UtilisateurDAOJdbc {
 
 			return c;
 		}
-		
-
+	
+		public String deleteById() throws SQLException {
+			String sql = "DELETE from UTILISATEURS WHERE no_utilisateur = ? ";
+			String d = null;
+			
+			Connection cnx = getConnection();
+			PreparedStatement stmt = cnx.prepareStatement(sql);
+			
+			stmt.executeUpdate(deleteById());
+			
+			
+			
+			
+			return d;
+		}
 	}
 
 

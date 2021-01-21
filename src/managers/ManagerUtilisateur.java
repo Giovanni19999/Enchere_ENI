@@ -19,6 +19,7 @@ public class ManagerUtilisateur {
 				base=c.selectByEmail(id);
 				
 				if (!mdp.equals(base.getMdp())) {
+					connexion = new Exception("Mot de passe incorrect");
 					throw connexion;
 				}
 			}catch (Exception e){
@@ -29,6 +30,8 @@ public class ManagerUtilisateur {
 				base=c.selectByPseudo(id);
 				
 				if (!mdp.equals(base.getMdp())) {
+					connexion = new Exception("Mot de passe incorrect");
+					
 					throw connexion;
 				}
 			}catch (Exception e){
