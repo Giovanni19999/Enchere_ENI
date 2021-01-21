@@ -41,11 +41,39 @@ public class ManagerUtilisateur {
 	}
 	
 	
-	public void modifierUtillisateur (BOUtilisateur preMod, BOUtilisateur postMod) throws SQLException {
-		if (!preMod.equals(postMod)) {
-			UtilisateurDAOJdbc c = new UtilisateurDAOJdbc();
-			c.updateById(postMod);
-		}
+	public void modifierUtillisateur (BOUtilisateur preMod, BOUtilisateur postMod,String newEmail,String newMdp) throws SQLException{
+		
+		
+		if (preMod.getMdp().equals(postMod.getMdp())) {
+			if ((postMod.getEmail().isEmpty()||postMod.getEmail().isBlank()) && (newEmail.isBlank()||newEmail.isEmpty())){
+				postMod.setEmail(preMod.getEmail());
+			}else if(!postMod.getEmail().isEmpty() && !postMod.getEmail().isBlank() 
+					&& (!newEmail.isBlank()&& !newEmail.isEmpty())
+					&& (!postMod.getEmail().equals(newEmail))
+					&& (postMod.getEmail().equals(preMod.getEmail()))){
+				
+				postMod.setEmail(newEmail);
+				
+			}
+			
+			postMod.setNoUtilisateur(preMod.getNoUtilisateur());
+			postMod.setCredit(preMod.getCredit());
+			postMod.setAdminstrateur(preMod.isAdminstrateur());
+			
+			if ( (newMdp.isBlank()||newMdp.isEmpty())) {
+				if (!preMod.getMdp().equals(newMdp)) {
+					preMod.setMdp(newMdp);
+				}
+				
+			}
+			
+			
+			if (!preMod.equals(postMod)) {
+				UtilisateurDAOJdbc c = new UtilisateurDAOJdbc();
+				c.updateById(postMod);
+		
+			}
+		}	
 	}
 	
 	public void suprimerUtilisateur (BOUtilisateur user) {
