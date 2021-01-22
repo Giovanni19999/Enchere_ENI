@@ -22,7 +22,7 @@ public class UtilisateurDAOJdbc {
 	private Connection getConnection() throws SQLException {
 		if (connection == null) {
 			DriverManager.registerDriver(new SQLServerDriver());
-			String url = "jdbc:sqlserver://localhost:1433;databaseName=BD_Encheres"; // Chargement du pilote JDBC
+			String url = "jdbc:sqlserver://localhost:1433;databaseName=BD_ENCHERES"; // Chargement du pilote JDBC
 			connection = DriverManager.getConnection (url, "sa", "Pa$$w0rd");
 		}
 		return connection;

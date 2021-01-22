@@ -54,9 +54,19 @@ public class ManagerUtilisateur {
 	}
 	
 	
-	public BOUtilisateur modifierUtillisateur (BOUtilisateur preMod, BOUtilisateur postMod,String newEmail,String newMdp) throws SQLException{
+	
+	Exception MODIFIER_MDP_INCORRECT = new Exception("20100");
+	Exception MODIFIER_MDP_IDENTIQUE = new Exception("20101");
+	Exception MODIFIER_EMAIL_INCORRECT = new Exception("20102");
+	Exception MODIFIER_EMAIL_IDENTIQUE = new Exception("20103");
+	Exception MODIFIER_EMAIL_MANQUANT =  new Exception("20104");
+	
+	
+	
+	
+	public BOUtilisateur modifierUtillisateur (BOUtilisateur preMod, BOUtilisateur postMod,String newEmail,String newMdp) throws Exception{
 		
-		
+		try {
 		if (preMod.getMdp().equals(postMod.getMdp())) {
 			
 			
@@ -67,20 +77,28 @@ public class ManagerUtilisateur {
 				
 			}else if(!postMod.getEmail().isEmpty() && !postMod.getEmail().isBlank() 
 					&& (!newEmail.isBlank()&& !newEmail.isEmpty())
-					&& (!postMod.getEmail().equals(newEmail))
-					&& (postMod.getEmail().equals(preMod.getEmail()))){
+					&& (postMod.getEmail().equals(preMod.getEmail()))
+					&& (!postMod.getEmail().equals(newEmail))){
 				
 				postMod.setEmail(newEmail);
 				
+			}else if((postMod.getEmail().equals(newEmail))){
+				throw MODIFIER_EMAIL_IDENTIQUE;
+			}else if (newEmail.isBlank() || newEmail.isEmpty()) {
+				throw MODIFIER_EMAIL_MANQUANT;
+			}else {
+				throw MODIFIER_EMAIL_INCORRECT;
 			}
 			
 			postMod.setNoUtilisateur(preMod.getNoUtilisateur());
 			postMod.setCredit(preMod.getCredit());
 			postMod.setAdminstrateur(preMod.isAdminstrateur());
 			
-			if ( (newMdp.isBlank()||newMdp.isEmpty())) {
+			if ( (!newMdp.isBlank()||!newMdp.isEmpty())) {
 				if (!preMod.getMdp().equals(newMdp)) {
 					preMod.setMdp(newMdp);
+				}else {
+					throw MODIFIER_MDP_IDENTIQUE;
 				}
 				
 			}
@@ -92,7 +110,10 @@ public class ManagerUtilisateur {
 		
 			}
 		} else {
-			System.out.println("Mot de passe faux");
+			throw MODIFIER_MDP_INCORRECT;
+		}
+		}catch (Exception finale) {
+			throw new Exception(finale.getMessage()); 
 		}
 		return postMod;
 	}

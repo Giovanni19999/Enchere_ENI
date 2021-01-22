@@ -40,8 +40,11 @@ public class ListCodeErreur {
 		CodeErreur code20102=new CodeErreur("20102", "L'email rentrée est incorrect");
 		listeCode.add(8,code20102);
 		
-		CodeErreur code20103=new CodeErreur("20102", "Les 2 emails doivent être différent");
+		CodeErreur code20103=new CodeErreur("20103", "Les 2 emails doivent être différent");
 		listeCode.add(9,code20103);
+		
+		CodeErreur code20104=new CodeErreur("20104", "Veiller rentrer une nouvelle email");
+		listeCode.add(10,code20104);
 		
 		
 	}

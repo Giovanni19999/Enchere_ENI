@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bo.BOUtilisateur;
+import exceptions.BusinessException;
 import managers.ManagerUtilisateur;
 
 /**
@@ -57,17 +58,29 @@ public class ServletModifierProfil extends HttpServlet {
 				request.getParameter("ville"));
 
 		try {
-			utilisateur = mngUtilisateur.modifierUtillisateur((BOUtilisateur)session.getAttribute("utilisateur"), utilisateur, request.getParameter("emailconfirmation"), request.getParameter("mdpconfirmation"));
+			
+				utilisateur = mngUtilisateur.modifierUtillisateur((BOUtilisateur)session.getAttribute("utilisateur"), utilisateur, request.getParameter("emailconfirmation"), request.getParameter("mdpconfirmation"));
+			
+				// TODO Auto-generated catch block
+				
+			
 			
 			
 			session.setAttribute("utilisateur", utilisateur);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/MonProfil.jsp");
 			if(rd != null) {rd.forward(request, response);}
-		} catch (SQLException e) {
+		} catch (Exception e) {
+			BusinessException exeption = new BusinessException();
+			
+			String erreur=exeption.lecteurMessage(e.getMessage());
+			System.err.println(erreur);
+			request.setAttribute("erreur",erreur);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ModifierProfil.jsp");
+			
 			if(rd != null) {rd.forward(request, response);}
-			e.printStackTrace();
+			
 		}
 		
 	}
