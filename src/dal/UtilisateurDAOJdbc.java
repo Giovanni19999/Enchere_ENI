@@ -14,6 +14,10 @@ import bo.BOUtilisateur;
 
 public class UtilisateurDAOJdbc {
 	private Connection connection = null;
+	
+	
+	
+	
 
 	private Connection getConnection() throws SQLException {
 		if (connection == null) {
@@ -41,7 +45,7 @@ public class UtilisateurDAOJdbc {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				 e.printStackTrace();
 			}
 
 
@@ -50,10 +54,12 @@ public class UtilisateurDAOJdbc {
 	}
 
 	public BOUtilisateur selectById(int id) throws Exception {
-		
-		
-		String sql = "SELECT * from UTILISATEURS WHERE no_utilisateur = ? ";
 		BOUtilisateur c = null;
+		try {
+			
+		
+			String sql = "SELECT * from UTILISATEURS WHERE no_utilisateur = ? ";
+			
 	
 			Connection cnx = getConnection();
 			PreparedStatement stmt = cnx.prepareStatement(sql);
@@ -77,12 +83,17 @@ public class UtilisateurDAOJdbc {
 			c.setAdminstrateur(rs.getBoolean("administrateur"));
 			c.setNoUtilisateur(rs.getInt("no_utilisateur"));
 			
+		} catch (Exception e) {
+			throw new Exception("10000");
+		}
 		return c;
 
 	}
-		public BOUtilisateur selectByPseudo(String pseudo) throws Exception{
+	public BOUtilisateur selectByPseudo(String pseudo) throws Exception{
+		BOUtilisateur c = null;
+		try {
 			String sql = "SELECT * from UTILISATEURS WHERE pseudo = ? ";
-			BOUtilisateur c = null;
+			
 
 			
 				Connection cnx = getConnection();
@@ -107,12 +118,18 @@ public class UtilisateurDAOJdbc {
 				c.setAdminstrateur(rs.getBoolean("administrateur"));
 				c.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				
-			return c;
+			
+		} catch (Exception e) {
+			throw new Exception("10001");
 		}
+		return c;
+	}
 
 		public BOUtilisateur selectByEmail(String email) throws Exception{
-			String sql = "SELECT * from UTILISATEURS WHERE email = ? ";
 			BOUtilisateur c = null;
+			try {
+				String sql = "SELECT * from UTILISATEURS WHERE email = ? ";
+				
 
 			
 				Connection cnx = getConnection();
@@ -137,23 +154,30 @@ public class UtilisateurDAOJdbc {
 				c.setAdminstrateur(rs.getBoolean("administrateur"));
 				c.setNoUtilisateur(rs.getInt("no_utilisateur"));	
 
+				
+			} catch (Exception e) {
+				throw new Exception("10002");
+			}
 			return c;
 		}
 
 	
-		public String deleteById() throws SQLException {
-			String sql = "DELETE from UTILISATEURS WHERE no_utilisateur = ? ";
-			String d = null;
+		public void deleteById() throws Exception {
+			try {
+				String sql = "DELETE from UTILISATEURS WHERE no_utilisateur = ? ";
+				
+				Connection cnx = getConnection();
+				PreparedStatement stmt = cnx.prepareStatement(sql);
+				
+				stmt.executeUpdate();
+			} catch (Exception e) {
+				throw new Exception("10200");
+			}
 			
-			Connection cnx = getConnection();
-			PreparedStatement stmt = cnx.prepareStatement(sql);
-			
-			stmt.executeUpdate(deleteById());
 			
 			
 			
 			
-			return d;
 		}
 
 		
@@ -161,23 +185,26 @@ public class UtilisateurDAOJdbc {
 
 	
 	public void updateById(BOUtilisateur user) throws SQLException {
-		String sql = "UPDATE UTILISATEURS "
-				+ "SET pseudo=?, mot_de_passe=?, nom=?, prenom=?,telephone=?,email=?,rue=?,code_postal=?,ville=?"+
-				" WHERE no_utilisateur=?";
-		Connection cnx = getConnection();
-		PreparedStatement stmt = cnx.prepareStatement(sql);
-		stmt.setString(1,user.getPseudo());
-		stmt.setString(2,user.getMdp());
-		stmt.setString(3,user.getNom());
-		stmt.setString(4,user.getPrenom());
-		stmt.setString(5,user.getTelephone());
-		stmt.setString(6,user.getEmail());
-		stmt.setString(7,user.getRue());
-		stmt.setString(8,user.getCodePostal());
-		stmt.setString(9,user.getVille());
-		stmt.setInt(10,user.getNoUtilisateur());
-		stmt.executeUpdate();
-
+		try {
+			String sql = "UPDATE UTILISATEURS "
+					+ "SET pseudo=?, mot_de_passe=?, nom=?, prenom=?,telephone=?,email=?,rue=?,code_postal=?,ville=?"+
+					" WHERE no_utilisateur=?";
+			Connection cnx = getConnection();
+			PreparedStatement stmt = cnx.prepareStatement(sql);
+			stmt.setString(1,user.getPseudo());
+			stmt.setString(2,user.getMdp());
+			stmt.setString(3,user.getNom());
+			stmt.setString(4,user.getPrenom());
+			stmt.setString(5,user.getTelephone());
+			stmt.setString(6,user.getEmail());
+			stmt.setString(7,user.getRue());
+			stmt.setString(8,user.getCodePostal());
+			stmt.setString(9,user.getVille());
+			stmt.setInt(10,user.getNoUtilisateur());
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			new Exception("10100");
+		}
 	}
 
 }

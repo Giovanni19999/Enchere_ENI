@@ -13,7 +13,8 @@ public class ManagerUtilisateur {
 	
 		BOUtilisateur base;
 		UtilisateurDAOJdbc c = new UtilisateurDAOJdbc();
-		Exception connexion = null;
+		Exception connexionPseudo = new Exception("20000");
+		Exception connexionEmail = new Exception("20001");
 		
 		if (id.contains("@")) {			
 			
@@ -21,23 +22,32 @@ public class ManagerUtilisateur {
 				base=c.selectByEmail(id);
 				
 				if (!mdp.equals(base.getMdp())) {
-					connexion = new Exception("Mot de passe incorrect");
-					throw connexion;
+					
+					throw connexionEmail;
 				}
 			}catch (Exception e){
-				throw new Exception("Email ou mot de passe incorrect");
+				if (e.getMessage().isBlank() ||e.getMessage().isEmpty()) {
+					throw new Exception(connexionEmail.getMessage());
+				}else {
+			
+					throw new Exception(e.getMessage());
+				}
 			}
+			
 		}else {
 			try {
 				base=c.selectByPseudo(id);
 				
 				if (!mdp.equals(base.getMdp())) {
-					connexion = new Exception("Mot de passe incorrect");
 					
-					throw connexion;
+					throw connexionPseudo;
 				}
 			}catch (Exception e){
-				throw new Exception("Pseudo ou mot de passe incorrect");
+				if (e.getMessage().isBlank() ||e.getMessage().isEmpty()) {
+					throw new Exception(connexionPseudo.getMessage());
+				}else {
+					throw new Exception(e.getMessage());
+				}
 			}
 		}
 		return base;
@@ -48,8 +58,13 @@ public class ManagerUtilisateur {
 		
 		
 		if (preMod.getMdp().equals(postMod.getMdp())) {
+			
+			
+			
 			if ((postMod.getEmail().isEmpty()||postMod.getEmail().isBlank()) && (newEmail.isBlank()||newEmail.isEmpty())){
+				
 				postMod.setEmail(preMod.getEmail());
+				
 			}else if(!postMod.getEmail().isEmpty() && !postMod.getEmail().isBlank() 
 					&& (!newEmail.isBlank()&& !newEmail.isEmpty())
 					&& (!postMod.getEmail().equals(newEmail))

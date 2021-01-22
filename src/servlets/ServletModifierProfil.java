@@ -49,9 +49,9 @@ public class ServletModifierProfil extends HttpServlet {
 				request.getParameter("email"),
 				request.getParameter("mdp"),
 				request.getParameter("pseudo"),
-				request.getParameter("tel").toString(),
+				request.getParameter("tel"),
 				request.getParameter("rue"),
-				request.getParameter("codepostal").toString(),
+				request.getParameter("codepostal"),
 				request.getParameter("ville"));
 	
 		ManagerUtilisateur mngUtilisateur = new ManagerUtilisateur();

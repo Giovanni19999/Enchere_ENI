@@ -1,34 +1,40 @@
 package exceptions;
 
+
 import java.util.ArrayList;
-import java.util.List;
 
-public class BusinessException extends Exception {
-	private static final long serialVersionUID = 1L;
-	private List<Integer> listeCodesErreur;
-	public BusinessException() {
-		super();
-		this.listeCodesErreur=new ArrayList<>();
-	}
-	/**
-	 *
-	 * @param code Code de l'erreur.
-	 * Doit avoir un message associé dans un fichier properties.
-	 */
-	public void ajouterErreur(int code)
-	{
-		if(!this.listeCodesErreur.contains(code))
-		{
-			this.listeCodesErreur.add(code);
+import message.CodeErreur;
+import message.ListCodeErreur;
+
+
+
+
+public class BusinessException  {
+	
+	public String lecteurMessage(String code) {
+		String[] codeSplit=code.split(" ");
+		ListCodeErreur instance=new ListCodeErreur();
+		int taille = instance.appelListeExeption();
+		String message = "";
+		int erreur;
+		for (int i = 0; i < taille; i++) {
+			System.out.println(instance.getCodeErreur(i).getCode());
+			
+			for (String code1 : codeSplit) {
+				System.out.println(code1);
+				if (code1.equals(instance.getCodeErreur(i).getCode())){
+					System.out.println("bon");
+					message=message+" "+instance.getCodeErreur(i).getLibelle();
+				}
+				
+			}
 		}
+		
+		return message;
+		
 	}
-	public boolean hasErreurs()
-	{
-		return this.listeCodesErreur.size()>0;
-	}
-	public List<Integer> getListeCodesErreur()
-	{
-		return this.listeCodesErreur;
-	}
-
+	
+	
+	
+	
 }

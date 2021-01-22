@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bo.BOUtilisateur;
+import exceptions.BusinessException;
 import managers.ManagerUtilisateur;
 
 /**
@@ -46,7 +47,7 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 		
 		ManagerUtilisateur connexionManager = new ManagerUtilisateur();
 		HttpSession session = request.getSession();
-		
+		BusinessException exeption = new BusinessException();
 		try {
 			BOUtilisateur utilisateur = null;
 			utilisateur = connexionManager.validationConnection(request.getParameter("identifiant"), request.getParameter("mdp"));
@@ -58,9 +59,10 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 			if(rd != null) {rd.forward(request, response);}
 
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
 			
-			request.setAttribute("erreur", e.getMessage());
+			String erreur=exeption.lecteurMessage(e.getMessage());
+			System.err.println(erreur);
+			request.setAttribute("erreur",erreur);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/FormulaireDeConnexion.jsp");
 			if(rd != null) {rd.forward(request, response);}
