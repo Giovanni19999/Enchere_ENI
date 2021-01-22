@@ -91,6 +91,8 @@ public class ManagerUtilisateur {
 				c.updateById(postMod);
 		
 			}
+		} else {
+			System.out.println("Mot de passe faux");
 		}
 		return postMod;
 	}
