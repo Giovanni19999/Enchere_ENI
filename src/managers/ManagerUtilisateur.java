@@ -83,10 +83,15 @@ public class ManagerUtilisateur {
 				postMod.setEmail(newEmail);
 				
 			}else if((postMod.getEmail().equals(newEmail))){
+				
 				throw MODIFIER_EMAIL_IDENTIQUE;
+				
 			}else if (newEmail.isBlank() || newEmail.isEmpty()) {
+				
 				throw MODIFIER_EMAIL_MANQUANT;
+				
 			}else {
+				
 				throw MODIFIER_EMAIL_INCORRECT;
 			}
 			
@@ -112,8 +117,11 @@ public class ManagerUtilisateur {
 		} else {
 			throw MODIFIER_MDP_INCORRECT;
 		}
+		
 		}catch (Exception finale) {
+			
 			throw new Exception(finale.getMessage()); 
+			
 		}
 		return postMod;
 	}

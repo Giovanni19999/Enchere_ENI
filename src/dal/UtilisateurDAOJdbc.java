@@ -13,42 +13,29 @@ import bo.BOUtilisateur;
 
 
 public class UtilisateurDAOJdbc {
-	private Connection connection = null;
 	
 	
 	
-	
-
-	private Connection getConnection() throws SQLException {
-		if (connection == null) {
-			DriverManager.registerDriver(new SQLServerDriver());
-			String url = "jdbc:sqlserver://localhost:1433;databaseName=BD_ENCHERES"; // Chargement du pilote JDBC
-			connection = DriverManager.getConnection (url, "sa", "Pa$$w0rd");
-		}
-		return connection;
-	}
 	private static final String INSERT= "insert into (identifiant, mdp) values(?,?)";
 
 	public void insert (BOUtilisateur connexion) {
-		if (connexion !=null) {
-
-
-			try (Connection cnx = ConnectionProvider.getConnection()){
-				PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-				pstmt.setString(1, connexion.getPseudo());
-				pstmt.setString(2, connexion.getMdp());
-				pstmt.executeUpdate();
-				ResultSet rs = pstmt.getGeneratedKeys();
-				if (rs.next()) {
-					connexion.setPseudo(rs.getString(1));
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				 e.printStackTrace();
+		
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, connexion.getPseudo());
+			pstmt.setString(2, connexion.getMdp());
+			pstmt.executeUpdate();
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				connexion.setPseudo(rs.getString(1));
 			}
-
-
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			 e.printStackTrace();
 		}
+
+
+		
 		
 	}
 
@@ -184,11 +171,11 @@ public class UtilisateurDAOJdbc {
 
 	
 	public void updateById(BOUtilisateur user) throws SQLException {
-		try {
+		try (Connection cnx = ConnectionProvider.getConnection()){
 			String sql = "UPDATE UTILISATEURS "
 					+ "SET pseudo=?, mot_de_passe=?, nom=?, prenom=?,telephone=?,email=?,rue=?,code_postal=?,ville=?"+
 					" WHERE no_utilisateur=?";
-			Connection cnx = getConnection();
+			
 			PreparedStatement stmt = cnx.prepareStatement(sql);
 			stmt.setString(1,user.getPseudo());
 			stmt.setString(2,user.getMdp());
