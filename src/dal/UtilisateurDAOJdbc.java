@@ -33,8 +33,7 @@ public class UtilisateurDAOJdbc {
 		if (connexion !=null) {
 
 
-			try {
-				Connection cnx = ConnectionProvider.getConnection();
+			try (Connection cnx = ConnectionProvider.getConnection()){
 				PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 				pstmt.setString(1, connexion.getPseudo());
 				pstmt.setString(2, connexion.getMdp());
@@ -55,13 +54,13 @@ public class UtilisateurDAOJdbc {
 
 	public BOUtilisateur selectById(int id) throws Exception {
 		BOUtilisateur c = null;
-		try {
+		try (Connection cnx = ConnectionProvider.getConnection()){
 			
 		
 			String sql = "SELECT * from UTILISATEURS WHERE no_utilisateur = ? ";
 			
 	
-			Connection cnx = getConnection();
+			
 			PreparedStatement stmt = cnx.prepareStatement(sql);
 	
 			stmt.setInt(1,id);
@@ -91,12 +90,12 @@ public class UtilisateurDAOJdbc {
 	}
 	public BOUtilisateur selectByPseudo(String pseudo) throws Exception{
 		BOUtilisateur c = null;
-		try {
+		try (Connection cnx = ConnectionProvider.getConnection()){
 			String sql = "SELECT * from UTILISATEURS WHERE pseudo = ? ";
 			
 
 			
-				Connection cnx = getConnection();
+				
 				PreparedStatement stmt = cnx.prepareStatement(sql);
 
 				stmt.setString(1,pseudo);
@@ -127,12 +126,12 @@ public class UtilisateurDAOJdbc {
 
 		public BOUtilisateur selectByEmail(String email) throws Exception{
 			BOUtilisateur c = null;
-			try {
+			try (Connection cnx = ConnectionProvider.getConnection()){
 				String sql = "SELECT * from UTILISATEURS WHERE email = ? ";
 				
 
 			
-				Connection cnx = getConnection();
+				
 				PreparedStatement stmt = cnx.prepareStatement(sql);
 
 				stmt.setString(1,email);
@@ -163,10 +162,10 @@ public class UtilisateurDAOJdbc {
 
 	
 		public void deleteById() throws Exception {
-			try {
+			try (Connection cnx = ConnectionProvider.getConnection()){
 				String sql = "DELETE from UTILISATEURS WHERE no_utilisateur = ? ";
 				
-				Connection cnx = getConnection();
+				
 				PreparedStatement stmt = cnx.prepareStatement(sql);
 				
 				stmt.executeUpdate();
