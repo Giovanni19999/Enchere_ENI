@@ -3,7 +3,8 @@ package dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import bo.BOArticle;
 
@@ -16,14 +17,11 @@ public class ArticleDAOJdbc {
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-			String datedebut = article.getDebut().format(formatter);
-			String datefin = article.getFin().format(formatter);
 			
 			pstmt.setString(1, article.getNom());
 			pstmt.setString(2, article.getDescription());
-			pstmt.setString(3, datedebut);
-			pstmt.setString(4, datefin);
+			pstmt.setTimestamp(3, new Timestamp(article.getDebut().getYear(), article.getDebut().getMonthValue()-1, article.getDebut().getDayOfMonth(), article.getDebut().getHour(), article.getDebut().getMinute(), article.getDebut().getSecond(), article.getDebut().getNano()) );
+			pstmt.setTimestamp(4, new Timestamp(article.getFin().getYear(), article.getFin().getMonthValue()-1, article.getFin().getDayOfMonth(), article.getFin().getHour(), article.getFin().getMinute(), article.getFin().getSecond(), article.getFin().getNano()) );
 			pstmt.setInt(5, article.getPrixIni());
 			pstmt.setInt(6, article.getUtilisateur().getNoUtilisateur());
 			pstmt.setInt(7, article.getCategorie().getNoCategorie());
