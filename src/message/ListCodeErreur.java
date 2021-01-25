@@ -24,27 +24,30 @@ public class ListCodeErreur {
 		CodeErreur code10100=new CodeErreur("10100", "Id inconnue pour l'update");
 		listeCode.add(3,code10100);
 		
+		CodeErreur code11000=new CodeErreur("11000", "Erreur du selectAll");
+		listeCode.add(4,code11000);
+		
 		
 		CodeErreur code20000=new CodeErreur("20000", "Pseudo ou mot de passe incorrect");
-		listeCode.add(4,code20000);
+		listeCode.add(5,code20000);
 		
 		CodeErreur code20001=new CodeErreur("20001", "Email ou mot de passe incorrect");
-		listeCode.add(5,code20001);
+		listeCode.add(6,code20001);
 		
 		CodeErreur code20100=new CodeErreur("20100", "Mot de passe incorrect");
-		listeCode.add(6,code20100);
+		listeCode.add(7,code20100);
 		
 		CodeErreur code20101=new CodeErreur("20101", "Les 2 mot de passe doivent être différent");
-		listeCode.add(7,code20101);
+		listeCode.add(8,code20101);
 	
 		CodeErreur code20102=new CodeErreur("20102", "L'email rentrée est incorrect");
-		listeCode.add(8,code20102);
+		listeCode.add(9,code20102);
 		
 		CodeErreur code20103=new CodeErreur("20103", "Les 2 emails doivent être différent");
-		listeCode.add(9,code20103);
+		listeCode.add(10,code20103);
 		
 		CodeErreur code20104=new CodeErreur("20104", "Veiller rentrer une nouvelle email");
-		listeCode.add(10,code20104);
+		listeCode.add(11,code20104);
 		
 		
 	}
