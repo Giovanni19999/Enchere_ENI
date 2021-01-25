@@ -2,11 +2,14 @@ package dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import bo.BOArticle;
+
 
 public class ArticleDAOJdbc {
 
@@ -36,7 +39,90 @@ public class ArticleDAOJdbc {
 	}
 	
 	
+	public ArrayList<BOArticle> selctByCat(String rec,int cat){
+		
+		ArrayList<BOArticle> c = new ArrayList<BOArticle>();
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			
+		
+			String sql = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=? AND %?%";
+			
+			
+			
+			PreparedStatement stmt = cnx.prepareStatement(sql);
+			
+			stmt.setInt(1, cat);
+			stmt.setString(2, rec);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				BOArticle art =new BOArticle();
+				
+				art.setNumero(rs.getInt("no_article"));
+				art.setNom(rs.getString("nom_article"));
+				art.setDescription(rs.getString("description"));
+				art.setDebut(rs.getTimestamp("date_debut_enchere").toLocalDateTime());
+				art.setFin(rs.getTimestamp("date_fin_enchere").toLocalDateTime());
+				art.setPrixIni(rs.getInt("prix_initial"));
+				art.setUtilisateur(new UtilisateurDAOJdbc().selectById(rs.getInt("no_utilisateur")));
+				art.setCategorie(new CategorieDAOJdbc().selectById(cat));
+				art.setEtatInit(rs.getString("etat_vente"));
+				
+				
+			}
+		
+		
+			
+		}catch (Exception e) {
+			
+		}
+		return c;
+		
+	}
 	
+	
+	public ArrayList<BOArticle> selctByRecherche(String rec){
+			
+			ArrayList<BOArticle> c = new ArrayList<BOArticle>();
+			try (Connection cnx = ConnectionProvider.getConnection()){
+				
+			
+				String sql = "SELECT * from ARTICLES_VENDUS WHERE %?%";
+				
+				
+				
+				PreparedStatement stmt = cnx.prepareStatement(sql);
+				
+				
+				stmt.setString(2, rec);
+				
+				ResultSet rs = stmt.executeQuery();
+				
+				while(rs.next()) {
+					BOArticle art =new BOArticle();
+					
+					art.setNumero(rs.getInt("no_article"));
+					art.setNom(rs.getString("nom_article"));
+					art.setDescription(rs.getString("description"));
+					art.setDebut(rs.getTimestamp("date_debut_enchere").toLocalDateTime());
+					art.setFin(rs.getTimestamp("date_fin_enchere").toLocalDateTime());
+					art.setPrixIni(rs.getInt("prix_initial"));
+					art.setUtilisateur(new UtilisateurDAOJdbc().selectById(rs.getInt("no_utilisateur")));
+					art.setCategorie(new CategorieDAOJdbc().selectById(rs.getInt("no_categorie")));
+					art.setEtatInit(rs.getString("etat_vente"));
+					c.add(art);
+					
+				}
+			
+			
+				
+			}catch (Exception e) {
+				
+			}
+			return c;
+	
+	}
 	
 	
 }
