@@ -14,12 +14,15 @@ public class ManagerArticle {
 	}
 	
 	public ArrayList<BOArticle> rechecheArticle(String saisie, BOCategorie cat){
+		ArrayList<BOArticle> liste=null;
+		if (cat==null) {
+			liste=new ArticleDAOJdbc().selctByRecherche(saisie);
+		}else {
+			liste=new ArticleDAOJdbc().selctByCat(saisie, cat.getNoCategorie());
+		}
 		
 		
-		
-		
-		
-		return null;
+		return liste;
 		
 	}
 		
