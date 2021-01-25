@@ -5,9 +5,9 @@ import dal.ArticleDAOJdbc;
 
 public class ManagerArticle {
 
-	public void VendreArticle(BOArticle article) {
+	public void InsertArticle(BOArticle article) {
 		ArticleDAOJdbc ArticleDAO = new ArticleDAOJdbc();
-		ArticleDAO.VendreArticle(article);
+		ArticleDAO.InsertArticle(article);
 	}
 }
 

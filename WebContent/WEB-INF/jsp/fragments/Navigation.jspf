@@ -32,6 +32,17 @@
 						<input type="submit" name="deconnexion" value="Se déconnecter">
 					</form>
 					
+					<form action="">
+						<input type="search" name="nomRecherche" placeholder="Que recherchez vous ?">
+
+						<select name="categorie">
+						    <option value="">--Choisissez une catégorie--</option>
+						    <c:forEach items="${applicationScope.no_categorie}">
+							    <option value="${applicationScope.no_categorie}">Dog</option>
+							</c:forEach>
+						</select>
+					</form>
+					
 					${sessionScope.utilisateur.pseudo} <!-- On affiche le pseudo et on cache le bouton connexion -->
 				</c:otherwise>
 			</c:choose>
