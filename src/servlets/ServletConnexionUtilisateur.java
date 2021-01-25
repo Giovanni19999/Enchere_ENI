@@ -35,6 +35,16 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Cookie[] cookies = request.getCookies();
+		String user = null;
+		for(Cookie cookie:cookies) {
+			if(cookie.getName().equals("saveUser")) {
+				user = cookie.getValue();
+				cookie.setValue(user);
+				response.addCookie(cookie);
+				request.setAttribute("user", cookie.getValue());
+			}
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/FormulaireDeConnexion.jsp");
 		if(rd != null) {rd.forward(request, response);}
@@ -44,6 +54,23 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getParameter("resterconnecter") != null){
+			Cookie cookie = new Cookie("saveUser",request.getParameter("identifiant"));
+			response.addCookie(cookie);
+			request.setAttribute("user", cookie.getValue());
+		} else {
+			Cookie[] cookies = request.getCookies();
+			for(Cookie cookie:cookies) {
+				if(cookie.getName().equals("saveUser")) {
+					cookie.setValue("");
+					cookie.setMaxAge(-1);
+					response.addCookie(cookie);
+					request.setAttribute("user", cookie.getValue());
+				}
+			}
+		}
+		
 		
 		ManagerUtilisateur connexionManager = new ManagerUtilisateur();
 		HttpSession session = request.getSession();
