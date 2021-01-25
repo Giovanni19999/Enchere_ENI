@@ -38,7 +38,7 @@
 						<select name="categorie">
 						    <option value="">--Choisissez une catégorie--</option>
 						    <c:forEach items="${sessionScope.Categories}" var="i">
-							    <option value="${i}">${i}</option>
+							    <option value="${i}">${i.libeler}</option>
 							</c:forEach>
 						</select>
 					</form>
