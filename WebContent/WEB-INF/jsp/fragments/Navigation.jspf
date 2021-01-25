@@ -36,11 +36,13 @@
 						<input type="search" name="nomRecherche" placeholder="Que recherchez vous ?">
 
 						<select name="categorie">
-						    <option value="">--Choisissez une catégorie--</option>
+						    <option value="">Toutes les catégories</option>
 						    <c:forEach items="${sessionScope.Categories}" var="i">
 							    <option value="${i}">${i}</option>
 							</c:forEach>
 						</select>
+						
+						<input type="submit" name="rechercher" value="Rechercher">
 					</form>
 					
 					${sessionScope.utilisateur.pseudo} <!-- On affiche le pseudo et on cache le bouton connexion -->
