@@ -1,12 +1,13 @@
 package bo;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 public class BOArticle {
 	private String nom;
 	private String categorie;
-	private Date debut;
-	private Date fin;
+	private LocalDateTime debut;
+	private LocalDateTime fin;
 	private String adresse;
 	/**
 	 * @return the nom
@@ -35,25 +36,25 @@ public class BOArticle {
 	/**
 	 * @return the debut
 	 */
-	public final Date getDebut() {
+	public final LocalDateTime getDebut() {
 		return debut;
 	}
 	/**
 	 * @param debut the debut to set
 	 */
-	public final void setDebut(Date debut) {
+	public final void setDebut(LocalDateTime debut) {
 		this.debut = debut;
 	}
 	/**
 	 * @return the fin
 	 */
-	public final Date getFin() {
+	public final LocalDateTime getFin() {
 		return fin;
 	}
 	/**
 	 * @param fin the fin to set
 	 */
-	public final void setFin(Date fin) {
+	public final void setFin(LocalDateTime fin) {
 		this.fin = fin;
 	}
 	/**
