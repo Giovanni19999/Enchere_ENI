@@ -1,6 +1,9 @@
 package managers;
 
+import java.util.ArrayList;
+
 import bo.BOArticle;
+import bo.BOCategorie;
 import dal.ArticleDAOJdbc;
 
 public class ManagerArticle {
@@ -9,5 +12,16 @@ public class ManagerArticle {
 		ArticleDAOJdbc ArticleDAO = new ArticleDAOJdbc();
 		ArticleDAO.InsertArticle(article);
 	}
+	
+	public ArrayList<BOArticle> rechecheArticle(String saisie, BOCategorie cat){
+		
+		
+		
+		
+		
+		return null;
+		
+	}
+		
 }
 
