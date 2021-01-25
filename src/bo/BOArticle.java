@@ -5,10 +5,20 @@ import java.time.LocalDateTime;
 
 public class BOArticle {
 	private String nom;
-	private String categorie;
+	private BOCategorie categorie;
 	private LocalDateTime debut;
 	private LocalDateTime fin;
 	private String adresse;
+	private String description;
+	private BOUtilisateur utilisateur;
+	private int prixIni;
+	
+	
+	public BOArticle() {
+		super();
+	}
+	
+	
 	/**
 	 * @return the nom
 	 */
@@ -20,18 +30,6 @@ public class BOArticle {
 	 */
 	public final void setNom(String nom) {
 		this.nom = nom;
-	}
-	/**
-	 * @return the categorie
-	 */
-	public final String getCategorie() {
-		return categorie;
-	}
-	/**
-	 * @param categorie the categorie to set
-	 */
-	public final void setCategorie(String categorie) {
-		this.categorie = categorie;
 	}
 	/**
 	 * @return the debut
@@ -69,7 +67,30 @@ public class BOArticle {
 	public final void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public int getPrixIni() {
+		return prixIni;
+	}
+	public void setPrixIni(int prixIni) {
+		this.prixIni = prixIni;
+	}
+	public BOUtilisateur getUtilisateur() {
+		return utilisateur;
+	}
+	public void setUtilisateur(BOUtilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+	public BOCategorie getCategorie() {
+		return categorie;
+	}
+	public void setCategorie(BOCategorie categorie) {
+		this.categorie = categorie;
+	}
 	
 
 }
