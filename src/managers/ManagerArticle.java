@@ -9,5 +9,5 @@ public class ManagerArticle {
 		ArticleDAOJdbc ArticleDAO = new ArticleDAOJdbc();
 		ArticleDAO.VendreArticle(article, noUtilisateur);
 	}
-
 }
+
