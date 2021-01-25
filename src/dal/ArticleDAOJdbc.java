@@ -69,7 +69,7 @@ public class ArticleDAOJdbc {
 				art.setCategorie(new CategorieDAOJdbc().selectById(cat));
 				art.setEtatInit(rs.getString("etat_vente"));
 				
-				
+				c.add(art);
 			}
 		
 		
@@ -95,7 +95,7 @@ public class ArticleDAOJdbc {
 				PreparedStatement stmt = cnx.prepareStatement(sql);
 				
 				
-				stmt.setString(2, rec);
+				stmt.setString(1, rec);
 				
 				ResultSet rs = stmt.executeQuery();
 				
