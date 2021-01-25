@@ -37,8 +37,8 @@
 
 						<select name="categorie">
 						    <option value="">--Choisissez une catégorie--</option>
-						    <c:forEach items="${sessionScope.Categories}">
-							    <option value="${sessionScope.Categories}">Dog</option>
+						    <c:forEach items="${sessionScope.Categories}" var="i">
+							    <option value="${i}">${i}</option>
 							</c:forEach>
 						</select>
 					</form>

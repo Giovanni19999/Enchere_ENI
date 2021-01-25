@@ -12,6 +12,9 @@ public class ManagerCategorie {
 	public ArrayList<BOCategorie> recupererCategorie() throws Exception{
 		CategorieDAOJdbc dal=new CategorieDAOJdbc();
 		liste= dal.selectAll();
+		for (BOCategorie boCategorie : liste) {
+			System.out.println(boCategorie.toString());
+		}
 		return liste;
 	}
 		

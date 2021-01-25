@@ -24,7 +24,7 @@ public class CategorieDAOJdbc {
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				BOCategorie cat=new BOCategorie(rs.getInt("no_categorie"), "libelle");
+				BOCategorie cat=new BOCategorie(rs.getInt("no_categorie"), rs.getString("libelle"));
 				c.add(cat);
 			}
 	

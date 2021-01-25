@@ -35,6 +35,12 @@ public class BOCategorie {
 	public void setLibeler(String libeler) {
 		this.libeler = libeler;
 	}
+
+
+	@Override
+	public String toString() {
+		return libeler;
+	}
 	
 	
 	
