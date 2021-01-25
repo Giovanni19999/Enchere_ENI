@@ -11,7 +11,7 @@ public class ArticleDAOJdbc {
 
 	private static final String INSERT= "INSERT INTO [dbo].[ARTICLES_VENDUS] (nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, no_utilisateur, no_categorie) values(?,?,?,?,?,?,?)";
 	
-	public void VendreArticle(BOArticle article, int noUtilisateur) {
+	public void VendreArticle(BOArticle article) {
 		
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -25,8 +25,8 @@ public class ArticleDAOJdbc {
 			pstmt.setString(3, datedebut);
 			pstmt.setString(4, datefin);
 			pstmt.setInt(5, article.getPrixIni());
-			pstmt.setInt(6, noUtilisateur);
-			pstmt.setInt(7, article.getCategorie());
+			pstmt.setInt(6, article.getUtilisateur().getNoUtilisateur());
+			pstmt.setInt(7, article.getCategorie().getNoCategorie());
 			
 			pstmt.executeUpdate();
 			
