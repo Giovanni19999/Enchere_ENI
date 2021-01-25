@@ -2,7 +2,7 @@ package bo;
 
 import java.util.Date;
 
-public class BOEnchere {
+public class BOArticle {
 	private String nom;
 	private String categorie;
 	private Date debut;
