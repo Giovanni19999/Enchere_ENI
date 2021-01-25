@@ -20,8 +20,8 @@
 	code postal :${sessionScope.utilisateur.codePostal}<br>
 	ville : ${sessionScope.utilisateur.ville}<br>
 	
-	<form action="${pageContext.request.contextPath}/profil/modifier" method="get">
-		<input type="submit" name="modifierprofil" value="Modifier Profil">
+	<form action="${pageContext.request.contextPath}/encheres/ajouter" method="get">
+		<input type="submit" name="ajouterencheres" value="Valider Enchere">
 	</form>
 					
 </body>
