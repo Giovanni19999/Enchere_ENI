@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
-import bo.BOArticle;
 import bo.BOCategorie;
 import managers.ManagerCategorie;
 
@@ -56,8 +54,8 @@ public class ServletRetourAccueil extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		HttpSession session1 = request.getSession();
-		doGet(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Encheres.jsp");
+		if(rd != null) {rd.forward(request, response);}
 	}
 
 }
