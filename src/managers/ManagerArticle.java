@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import bo.BOArticle;
 import bo.BOCategorie;
+import bo.BOUtilisateur;
 import dal.ArticleDAOJdbc;
 
 public class ManagerArticle {
@@ -25,6 +26,41 @@ public class ManagerArticle {
 		return liste;
 		
 	}
+	
+	public ArrayList<BOArticle> rechecheArticleCo(String saisie, BOCategorie cat,BOUtilisateur user){
+		ArrayList<BOArticle> listeRecherche=rechecheArticle(saisie,cat);
+		ArrayList<BOArticle> listeParticipe=new ManagerEnchere().recupererArticleEncherie(user);
+		if (listeParticipe != null) {
+			
+			for (int i = 0; i < listeParticipe.size(); i++) {
+				if (!listeRecherche.contains(listeParticipe.get(i))){
+					listeParticipe.remove(i);
+				}
+			}
+			listeRecherche.removeAll(listeParticipe);
+			
+			listeParticipe.addAll(listeRecherche);
+			
 		
+		}else {
+			listeParticipe=listeRecherche;
+		}
+		return listeParticipe;
+	}
+	
+	
+	
+	public BOArticle rechercheUnArticle(int noArt) {
+		
+		BOArticle art= new ArticleDAOJdbc().selctById(noArt);
+		
+		
+		return art;
+		
+	}
+	
+	
+	
+	
 }
 

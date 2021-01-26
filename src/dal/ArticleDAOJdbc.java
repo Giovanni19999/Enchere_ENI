@@ -25,7 +25,7 @@ public class ArticleDAOJdbc {
 			pstmt.setString(2, article.getDescription());
 			pstmt.setTimestamp(3, new Timestamp(article.getDebut().getYear(), article.getDebut().getMonthValue()-1, article.getDebut().getDayOfMonth(), article.getDebut().getHour(), article.getDebut().getMinute(), article.getDebut().getSecond(), article.getDebut().getNano()) );
 			pstmt.setTimestamp(4, new Timestamp(article.getFin().getYear(), article.getFin().getMonthValue()-1, article.getFin().getDayOfMonth(), article.getFin().getHour(), article.getFin().getMinute(), article.getFin().getSecond(), article.getFin().getNano()) );
-			pstmt.setInt(5, article.getPrixIni());
+			pstmt.setFloat(5, article.getPrixIni());
 			pstmt.setInt(6, article.getUtilisateur().getNoUtilisateur());
 			pstmt.setInt(7, article.getCategorie().getNoCategorie());
 			
@@ -45,7 +45,7 @@ public class ArticleDAOJdbc {
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			
 		
-			String sql = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=? AND %?%";
+			String sql = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=? AND %?%=nom_article";
 			
 			
 			
@@ -64,7 +64,7 @@ public class ArticleDAOJdbc {
 				art.setDescription(rs.getString("description"));
 				art.setDebut(rs.getTimestamp("date_debut_enchere").toLocalDateTime());
 				art.setFin(rs.getTimestamp("date_fin_enchere").toLocalDateTime());
-				art.setPrixIni(rs.getInt("prix_initial"));
+				art.setPrixIni(rs.getFloat("prix_initial"));
 				art.setUtilisateur(new UtilisateurDAOJdbc().selectById(rs.getInt("no_utilisateur")));
 				art.setCategorie(new CategorieDAOJdbc().selectById(cat));
 				art.setEtatInit(rs.getString("etat_vente"));
@@ -80,6 +80,48 @@ public class ArticleDAOJdbc {
 		return c;
 		
 	}
+	public BOArticle selctById(int noArt){
+		BOArticle art =new BOArticle();
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			
+			
+			String sql = "SELECT * from ARTICLES_VENDUS WHERE no_article=?";
+			
+			
+			
+			PreparedStatement stmt = cnx.prepareStatement(sql);
+			
+			
+			stmt.setInt(1, noArt);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			
+			
+				
+			art.setNumero(rs.getInt("no_article"));
+			art.setNom(rs.getString("nom_article"));
+			art.setDescription(rs.getString("description"));
+			art.setDebut(rs.getTimestamp("date_debut_enchere").toLocalDateTime());
+			art.setFin(rs.getTimestamp("date_fin_enchere").toLocalDateTime());
+			art.setPrixIni(rs.getFloat("prix_initial"));
+			art.setUtilisateur(new UtilisateurDAOJdbc().selectById(rs.getInt("no_utilisateur")));
+			art.setCategorie(new CategorieDAOJdbc().selectById(rs.getInt("no_categorie")));
+			art.setEtatInit(rs.getString("etat_vente"));
+				
+				
+			
+		
+		
+			
+		}catch (Exception e) {
+			
+		}
+		return art;
+		
+	}
+	
+	
 	
 	
 	public ArrayList<BOArticle> selctByRecherche(String rec){
@@ -88,7 +130,7 @@ public class ArticleDAOJdbc {
 			try (Connection cnx = ConnectionProvider.getConnection()){
 				
 			
-				String sql = "SELECT * from ARTICLES_VENDUS WHERE %?%";
+				String sql = "SELECT * from ARTICLES_VENDUS WHERE %?%=nom_article";
 				
 				
 				
@@ -107,7 +149,7 @@ public class ArticleDAOJdbc {
 					art.setDescription(rs.getString("description"));
 					art.setDebut(rs.getTimestamp("date_debut_enchere").toLocalDateTime());
 					art.setFin(rs.getTimestamp("date_fin_enchere").toLocalDateTime());
-					art.setPrixIni(rs.getInt("prix_initial"));
+					art.setPrixIni(rs.getFloat("prix_initial"));
 					art.setUtilisateur(new UtilisateurDAOJdbc().selectById(rs.getInt("no_utilisateur")));
 					art.setCategorie(new CategorieDAOJdbc().selectById(rs.getInt("no_categorie")));
 					art.setEtatInit(rs.getString("etat_vente"));
@@ -123,6 +165,8 @@ public class ArticleDAOJdbc {
 			return c;
 	
 	}
+	
+	
 	
 	
 }

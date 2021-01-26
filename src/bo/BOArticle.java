@@ -12,7 +12,7 @@ public class BOArticle {
 	private String adresse;
 	private String description;
 	private BOUtilisateur utilisateur;
-	private int prixIni;
+	private float prixIni;
 	private String etatInit;
 	private String etatComp;
 	
@@ -79,10 +79,10 @@ public class BOArticle {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getPrixIni() {
+	public float getPrixIni() {
 		return prixIni;
 	}
-	public void setPrixIni(int prixIni) {
+	public void setPrixIni(float prixIni) {
 		this.prixIni = prixIni;
 	}
 	public BOUtilisateur getUtilisateur() {
