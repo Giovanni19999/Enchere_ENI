@@ -32,22 +32,23 @@
 						<input type="submit" name="deconnexion" value="Se déconnecter">
 					</form>
 					
+					<a href="${pageContext.request.contextPath}/enchere/ajouter"><input type="button" name="Vendre" value="Vendre"></a>
+					
 					<form action="">
 						<input type="search" name="nomRecherche" placeholder="Que recherchez vous ?">
 
 						<select name="categorie">
-						    <option value="">Toutes les catégories</option>
+						    <option value="">--Choisissez une catégorie--</option>
 						    <c:forEach items="${sessionScope.Categories}" var="i">
-							    <option value="${i}">${i.libeler}</option>
+							    <option value="${i}">${i}</option>
 							</c:forEach>
 						</select>
-						
-						<input type="submit" name="rechercher" value="Rechercher">
 					</form>
 					
 					${sessionScope.utilisateur.pseudo} <!-- On affiche le pseudo et on cache le bouton connexion -->
 				</c:otherwise>
 			</c:choose>
+			<form action="${pageContext.request.contextPath}/afficher/enchere" method="get"></form>
 		</nav>
 	</header>
 
