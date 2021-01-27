@@ -23,8 +23,8 @@ public class ArticleDAOJdbc {
 			
 			pstmt.setString(1, article.getNom());
 			pstmt.setString(2, article.getDescription());
-			pstmt.setTimestamp(3, new Timestamp(article.getDebut().getYear(), article.getDebut().getMonthValue()-1, article.getDebut().getDayOfMonth(), article.getDebut().getHour(), article.getDebut().getMinute(), article.getDebut().getSecond(), article.getDebut().getNano()) );
-			pstmt.setTimestamp(4, new Timestamp(article.getFin().getYear(), article.getFin().getMonthValue()-1, article.getFin().getDayOfMonth(), article.getFin().getHour(), article.getFin().getMinute(), article.getFin().getSecond(), article.getFin().getNano()) );
+			pstmt.setTimestamp(3, new Timestamp(article.getDebut().getYear()-1900, article.getDebut().getMonthValue()-1, article.getDebut().getDayOfMonth(), article.getDebut().getHour(), article.getDebut().getMinute(), article.getDebut().getSecond(), article.getDebut().getNano()) );
+			pstmt.setTimestamp(4, new Timestamp(article.getFin().getYear()-1900, article.getFin().getMonthValue()-1, article.getFin().getDayOfMonth(), article.getFin().getHour(), article.getFin().getMinute(), article.getFin().getSecond(), article.getFin().getNano()) );
 			pstmt.setFloat(5, article.getPrixIni());
 			pstmt.setInt(6, article.getUtilisateur().getNoUtilisateur());
 			pstmt.setInt(7, article.getCategorie().getNoCategorie());
