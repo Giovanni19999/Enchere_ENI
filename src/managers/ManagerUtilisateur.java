@@ -106,7 +106,7 @@ public class ManagerUtilisateur {
 			
 			if ( (!newMdp.isBlank()||!newMdp.isEmpty())) {
 				if (!preMod.getMdp().equals(newMdp)) {
-					preMod.setMdp(newMdp);
+					postMod.setMdp(newMdp);
 				}else {
 					throw MODIFIER_MDP_IDENTIQUE;
 				}
