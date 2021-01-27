@@ -12,7 +12,7 @@
 
 	<h1>Mise en vente d'une enchère</h1>
 	
-	<form action="${pageContext.request.contextPath}/enchere/ajouter" method="post">
+	<form action="${pageContext.request.contextPath}/encheres/ajouter" method="post">
 		<ul>
 		<li><input type="text" name="nomenchere" placeholder="Nom de votre enchère" size="45"></li>
 
@@ -20,7 +20,7 @@
 			<select name="categorie" required="required">
 			    <option value="">Veuillez choisir une catégorie</option>
 			    <c:forEach items="${sessionScope.Categories}" var="i">
-				   <option value="${i}">${i.libeler}</option>
+				   <option value="${i.noCategorie}">${i.libeler}</option>
 				</c:forEach>
 			</select>
 		</li>

@@ -110,6 +110,9 @@ public class ServletAjouterEnchere extends HttpServlet {
 		} catch (Exception e) {
 			String erreur=exeption.lecteurMessage(e.getMessage());
 			request.setAttribute("erreur",erreur);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/MiseEnVenteEnchere.jsp");
+			if(rd != null) {rd.forward(request, response);}
 		}
 	}
 
