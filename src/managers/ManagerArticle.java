@@ -12,7 +12,7 @@ public class ManagerArticle {
 	Exception INSER_DATE_INVERSER =new Exception("21000");
 	
 	
-	public void InsertArticle(BOArticle article) throws Exception {
+	public BOArticle InsertArticle(BOArticle article) throws Exception {
 		
 		if (article.getDebut().isAfter(article.getFin())) {
 			throw INSER_DATE_INVERSER;
@@ -22,6 +22,9 @@ public class ManagerArticle {
 		ArticleDAOJdbc ArticleDAO = new ArticleDAOJdbc();
 		
 		ArticleDAO.InsertArticle(article);
+		
+		article.setNumero(selectNumArticle(article));
+		return article;
 	}
 	
 	public ArrayList<BOArticle> rechecheArticle(String saisie, BOCategorie cat){
@@ -74,7 +77,10 @@ public class ManagerArticle {
 		
 	}
 	
-	
+	public int selectNumArticle(BOArticle art){
+		int num=new ArticleDAOJdbc().selectNumByArticle(art);
+		return num;
+	}
 	
 	
 }
