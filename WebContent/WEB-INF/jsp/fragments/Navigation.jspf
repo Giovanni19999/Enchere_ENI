@@ -36,6 +36,7 @@
 					
 					<form action="">
 						<input type="search" name="nomRecherche" placeholder="Que recherchez vous ?">
+						<a href="localhost:8080/Enchere_ENI?article=article"></a>
 
 						<select name="categorie">
 						    <option value="">--Choisissez une catégorie--</option>
