@@ -14,19 +14,20 @@ import javax.servlet.http.HttpSession;
 import bo.BOArticle;
 import bo.BOCategorie;
 import bo.BOUtilisateur;
+import exceptions.BusinessException;
 import managers.ManagerArticle;
 
 /**
  * Servlet implementation class AjouterEnchere
  */
 @WebServlet("/encheres/ajouter")
-public class AjouterEnchere extends HttpServlet {
+public class ServletAjouterEnchere extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjouterEnchere() {
+    public ServletAjouterEnchere() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,15 +38,38 @@ public class AjouterEnchere extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LocalDateTime dateString = LocalDateTime.now();
 		
-		String format = null;
+		String formatMonth = null;
+		String formatDay = null;
+		String formatHour = null;
+		String formatMin = null;
+		
 		if(dateString.getMonthValue() < 10) {
-			format = "0" + dateString.getMonthValue();
+			formatMonth = "0" + dateString.getMonthValue();
 		} else {
-			format = dateString.getMonthValue() + "";
+			formatMonth = dateString.getMonthValue() + "";
+		}
+		
+		if(dateString.getDayOfMonth() < 10) {
+			formatDay = "0" + dateString.getDayOfMonth();
+		} else {
+			formatDay = dateString.getDayOfMonth() + "";
+		}
+		
+		if(dateString.getHour() < 10) {
+			formatHour = "0" + dateString.getHour();
+		} else {
+			formatHour = dateString.getHour() + "";
+		}
+		
+		if(dateString.getMinute() < 10) {
+			formatMin = "0" + dateString.getMinute();
+		} else {
+			formatMin = dateString.getMinute() + "";
 		}
 		
 		
-		String dateStringFormater = dateString.getYear() + "-" + format + "-" + dateString.getDayOfMonth() + "T" + dateString.getHour() + ":" + dateString.getMinute();
+		String dateStringFormater = dateString.getYear() + "-" + formatMonth + "-" + formatDay + "T" + formatHour + ":" + formatMin;
+		System.out.println(dateStringFormater);
 		request.setAttribute("dateMaintenant", dateStringFormater);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/MiseEnVenteEnchere.jsp");
@@ -75,7 +99,18 @@ public class AjouterEnchere extends HttpServlet {
 		article.setPrixIni(Float.parseFloat((request.getParameter("prixenchere"))));
 		article.setUtilisateur(utilisateur);
 		
-		manager.InsertArticle(article);
+		
+		BusinessException exeption = new BusinessException();
+		try {
+			manager.InsertArticle(article);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Encheres.jsp");
+			if(rd != null) {rd.forward(request, response);}
+			
+		} catch (Exception e) {
+			String erreur=exeption.lecteurMessage(e.getMessage());
+			request.setAttribute("erreur",erreur);
+		}
 	}
 
 }

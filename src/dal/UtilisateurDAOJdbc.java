@@ -33,10 +33,6 @@ public class UtilisateurDAOJdbc {
 			// TODO Auto-generated catch block
 			 e.printStackTrace();
 		}
-
-
-		
-		
 	}
 
 	public BOUtilisateur selectById(int id) throws Exception {
@@ -116,14 +112,10 @@ public class UtilisateurDAOJdbc {
 			try (Connection cnx = ConnectionProvider.getConnection()){
 				String sql = "SELECT * from UTILISATEURS WHERE email = ? ";
 				
-
-			
-				
 				PreparedStatement stmt = cnx.prepareStatement(sql);
 
 				stmt.setString(1,email);
 				ResultSet rs = stmt.executeQuery();
-
 
 				rs.next();
 				c = new BOUtilisateur();
@@ -140,7 +132,6 @@ public class UtilisateurDAOJdbc {
 				c.setAdminstrateur(rs.getBoolean("administrateur"));
 				c.setNoUtilisateur(rs.getInt("no_utilisateur"));	
 
-				
 			} catch (Exception e) {
 				throw new Exception("10002");
 			}
@@ -159,10 +150,6 @@ public class UtilisateurDAOJdbc {
 			} catch (Exception e) {
 				throw new Exception("10200");
 			}
-			
-			
-			
-			
 			
 		}
 
