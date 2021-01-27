@@ -97,8 +97,8 @@ public class ArticleDAOJdbc {
 			ResultSet rs = stmt.executeQuery();
 			
 			
+			rs.next();
 			
-				
 			art.setNumero(rs.getInt("no_article"));
 			art.setNom(rs.getString("nom_article"));
 			art.setDescription(rs.getString("description"));
@@ -108,14 +108,14 @@ public class ArticleDAOJdbc {
 			art.setUtilisateur(new UtilisateurDAOJdbc().selectById(rs.getInt("no_utilisateur")));
 			art.setCategorie(new CategorieDAOJdbc().selectById(rs.getInt("no_categorie")));
 			art.setEtatInit(rs.getString("etat_vente"));
-				
+			System.out.println("bon");
 				
 			
 		
 		
 			
 		}catch (Exception e) {
-			
+			System.err.println(e.getStackTrace());
 		}
 		return art;
 		
