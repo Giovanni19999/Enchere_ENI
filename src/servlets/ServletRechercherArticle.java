@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -9,8 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bo.BOArticle;
 import bo.BOCategorie;
+import bo.BOUtilisateur;
 import exceptions.BusinessException;
 import managers.ManagerArticle;
 import managers.ManagerCategorie;
@@ -35,11 +39,22 @@ public class ServletRechercherArticle extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		ManagerArticle manager = new ManagerArticle();
+		ArrayList<BOArticle> article= null;
 		String categorie = request.getParameter("categorie");
+		String recherche = request.getParameter("nomRecherche");
+		HttpSession session = request.getSession();
 		
+		if (session.getAttribute("utilisateur")== null) {
+			article = manager.rechecheArticle(recherche, categorie);
+			
+		} else {
+			article = manager.rechecheArticleCo(recherche, categorie, (BOUtilisateur) session.getAttribute("utilisateur"));
+		}
+		request.setAttribute("article", article);
 		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/fragments/Navigation.jsp").forward(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ListeEnchere.jsp");
+		if(rd != null) {rd.forward(request, response);}
 		
 		
 		
@@ -49,28 +64,12 @@ public class ServletRechercherArticle extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
-	/*
-	 * 
 	 
-	private String lireCategorie(HttpServletRequest request, List<String> listeCodesErreur) {
-		String ListeCategorie=null;
-		try
-		{
-			if(request.getParameter("categorie")!=null)
-			{
-				ListeCategorie =(request.getParameter("categorie"));
-			}
-		}
-		catch(BusinessException e)
-		{
-			e.printStackTrace();
-			
-		}
-		return ListeCategorie;
-	}
-	*/
+	 
+	
+	
+	
 
 }

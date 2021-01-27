@@ -39,9 +39,10 @@ public class ServletAfficherEnchere extends HttpServlet {
 		
 		
 		String numString = request.getParameter("noArticle");
-		article = manager.rechercheUnArticle(Integer.parseInt(numString));
-		request.setAttribute ("article",article);
-		
+		if(numString !=null) {			
+			article = manager.rechercheUnArticle(Integer.parseInt(numString));
+			request.setAttribute ("article",article);
+		}
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Enchere.jsp");

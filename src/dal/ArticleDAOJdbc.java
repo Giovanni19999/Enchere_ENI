@@ -45,7 +45,7 @@ public class ArticleDAOJdbc {
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			
 		
-			String sql = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=? AND %?%=nom_article";
+			String sql = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=? AND nom_article LIKE '%?%'";
 			
 			
 			
@@ -130,15 +130,18 @@ public class ArticleDAOJdbc {
 			try (Connection cnx = ConnectionProvider.getConnection()){
 				
 			
-				String sql = "SELECT * from ARTICLES_VENDUS WHERE %?%=nom_article";
+				String sql = "SELECT * from ARTICLES_VENDUS WHERE nom_article LIKE ? ";
 				
 				
-				
+				System.out.println(rec);
 				PreparedStatement stmt = cnx.prepareStatement(sql);
 				
+				System.out.println("je suis là");
+				System.out.println(stmt);
 				
-				stmt.setString(1, rec);
+				stmt.setString(1, "%"+ rec+"%");
 				
+				System.out.println("je suis là");
 				ResultSet rs = stmt.executeQuery();
 				
 				while(rs.next()) {

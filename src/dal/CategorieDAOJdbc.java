@@ -44,16 +44,16 @@ public class CategorieDAOJdbc {
 			try (Connection cnx = ConnectionProvider.getConnection()){
 				
 			
-				String sql = "SELECT * from CATEGORIES WHERE ?";
+				String sql = "SELECT * from CATEGORIES WHERE no_categorie= ?";
 				
 		
 				
 				PreparedStatement stmt = cnx.prepareStatement(sql);
 		
-				ResultSet rs = stmt.executeQuery();
-				
 				stmt.setInt(1, id);
 				
+				
+				ResultSet rs = stmt.executeQuery();
 				rs.next();
 				cat=new BOCategorie(rs.getInt("no_categorie"), rs.getString("libelle"));
 				

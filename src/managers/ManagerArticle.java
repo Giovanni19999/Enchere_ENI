@@ -27,15 +27,15 @@ public class ManagerArticle {
 		return article;
 	}
 	
-	public ArrayList<BOArticle> rechecheArticle(String saisie, BOCategorie cat){
+	public ArrayList<BOArticle> rechecheArticle(String saisie, String cat){
 		ArrayList<BOArticle> liste=null;
 		
 		
 		
-		if (cat==null) {
+		if (cat.isEmpty()) {
 			liste=new ArticleDAOJdbc().selctByRecherche(saisie);
 		}else {
-			liste=new ArticleDAOJdbc().selctByCat(saisie, cat.getNoCategorie());
+			liste=new ArticleDAOJdbc().selctByCat(saisie, Integer.parseInt(cat));
 		}
 		
 		
@@ -43,7 +43,7 @@ public class ManagerArticle {
 		
 	}
 	
-	public ArrayList<BOArticle> rechecheArticleCo(String saisie, BOCategorie cat,BOUtilisateur user){
+	public ArrayList<BOArticle> rechecheArticleCo(String saisie, String cat,BOUtilisateur user){
 		ArrayList<BOArticle> listeRecherche=rechecheArticle(saisie,cat);
 		ArrayList<BOArticle> listeParticipe=new ManagerEnchere().recupererArticleEncherie(user);
 		
