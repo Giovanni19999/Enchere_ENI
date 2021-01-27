@@ -75,7 +75,12 @@ public class AjouterEnchere extends HttpServlet {
 		article.setPrixIni(Float.parseFloat((request.getParameter("prixenchere"))));
 		article.setUtilisateur(utilisateur);
 		
-		manager.InsertArticle(article);
+		try {
+			manager.InsertArticle(article);
+		} catch (Exception e) {
+			
+			
+		}
 	}
 
 }
