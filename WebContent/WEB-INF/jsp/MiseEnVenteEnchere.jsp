@@ -12,6 +12,10 @@
 
 	<h1>Mise en vente d'une enchère</h1>
 	
+	<p> <!-- Si l'utilisateur renseigne un mauvais champ, on affiche un message d'erreur. -->
+		<c:if test="${!empty requestScope.erreur}"> erreur : ${requestScope.erreur} </c:if>
+	</p>
+	
 	<form action="${pageContext.request.contextPath}/encheres/ajouter" method="post">
 		<ul>
 		<li><input type="text" name="nomenchere" placeholder="Nom de votre enchère" size="45"></li>
@@ -28,7 +32,7 @@
 			<li><input type="datetime-local" min="${requestScope.dateMaintenant }" name="datedebutenchere" placeholder="Date et heure du lancement de l'enchère" size="45" required="required"></li>
 			<li><input type="datetime-local" min="${requestScope.dateMaintenant }" name="datefinenchere" placeholder="Date et heure de fin de l'enchère" size="45" required="required"></li>
 			<li><input type="text" name="adresseretraitenchere" placeholder="Adresse ou l'article est vendu" size="45" required="required"></li>
-			<li><textarea name="descriptionenchere" placeholder="Description de votre enchère (600 charactères max.)" rows="6" cols="100" autocapitalize="on"></textarea></li>
+			<li><textarea name="descriptionenchere" placeholder="Description de votre enchère (600 charactères max.)" rows="6" cols="100" autocapitalize="on" required="required"></textarea></li>
 		</ul>
 		
 		<input type="submit" name="valider" value="valider">

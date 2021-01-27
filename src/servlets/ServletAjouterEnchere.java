@@ -103,9 +103,10 @@ public class ServletAjouterEnchere extends HttpServlet {
 		
 		BusinessException exeption = new BusinessException();
 		try {
-			manager.InsertArticle(article);
+			article = manager.InsertArticle(article);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Encheres.jsp");
+			request.setAttribute("noArticle", article.getNumero());
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Enchere.jsp");
 			if(rd != null) {rd.forward(request, response);}
 			
 		} catch (Exception e) {
