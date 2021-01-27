@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bo.BOArticle;
+import managers.ManagerArticle;
+
 /**
  * Servlet implementation class ServletAfficherEnchere
  */
@@ -28,8 +31,19 @@ public class ServletAfficherEnchere extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idEnchere=0;
-		idEnchere = Integer.parseInt(request.getParameter("no_utilisateur"));
+		ManagerArticle manager = new ManagerArticle();
+		BOArticle article = null;
+		
+		
+		
+		
+		
+		String numString = request.getParameter("noArticle");
+		article = manager.rechercheUnArticle(Integer.parseInt(numString));
+		request.setAttribute ("article",article);
+		
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Enchere.jsp");
 		if(rd != null) {rd.forward(request, response);}
 		
@@ -40,6 +54,7 @@ public class ServletAfficherEnchere extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Enchere.jsp");
 		if(rd != null) {rd.forward(request, response);}
 	}
