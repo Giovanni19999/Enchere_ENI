@@ -53,7 +53,7 @@ public class ListCodeErreur {
 		listeCode.add(12,code20105);
 		
 		CodeErreur code21000=new CodeErreur("21000", "La date du debut de l'enchere est superieur a la date de fin");
-		listeCode.add(100,code21000);
+		listeCode.add(code21000);
 	}
 	
 	public int appelListeExeption(){
