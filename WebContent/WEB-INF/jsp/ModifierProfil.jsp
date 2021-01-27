@@ -35,6 +35,10 @@
 			<li><a href="${pageContext.request.contextPath}/profil/afficher"><input type="button" name="annulermodifprofil" value="Annuler"></a></li>
 		</ul>
 	</form>
-
+	
+	<form action="${pageContext.request.contextPath}/supprimer/profil"method="post"> 
+	<input type="submit" name="Supprimerprofil" value="Supprimer Profil">
+	
+	</form> 
 </body>
 </html>
