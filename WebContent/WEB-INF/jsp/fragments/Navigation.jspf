@@ -32,7 +32,7 @@
 						<input type="submit" name="deconnexion" value="Se déconnecter">
 					</form>
 					
-					<a href="${pageContext.request.contextPath}/enchere/ajouter"><input type="button" name="Vendre" value="Vendre"></a>
+					<a href="${pageContext.request.contextPath}/encheres/ajouter"><input type="button" name="Vendre" value="Vendre"></a>
 					
 					<form action="">
 						<input type="search" name="nomRecherche" placeholder="Que recherchez vous ?">
