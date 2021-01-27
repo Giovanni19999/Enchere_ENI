@@ -8,14 +8,27 @@ import bo.BOUtilisateur;
 import dal.ArticleDAOJdbc;
 
 public class ManagerArticle {
-
-	public void InsertArticle(BOArticle article) {
+	
+	Exception INSER_DATE_INVERSER =new Exception("21000");
+	
+	
+	public void InsertArticle(BOArticle article) throws Exception {
+		
+		if (article.getDebut().isAfter(article.getFin())) {
+			throw INSER_DATE_INVERSER;
+		}
+		
+		
 		ArticleDAOJdbc ArticleDAO = new ArticleDAOJdbc();
+		
 		ArticleDAO.InsertArticle(article);
 	}
 	
 	public ArrayList<BOArticle> rechecheArticle(String saisie, BOCategorie cat){
 		ArrayList<BOArticle> liste=null;
+		
+		
+		
 		if (cat==null) {
 			liste=new ArticleDAOJdbc().selctByRecherche(saisie);
 		}else {
@@ -30,6 +43,8 @@ public class ManagerArticle {
 	public ArrayList<BOArticle> rechecheArticleCo(String saisie, BOCategorie cat,BOUtilisateur user){
 		ArrayList<BOArticle> listeRecherche=rechecheArticle(saisie,cat);
 		ArrayList<BOArticle> listeParticipe=new ManagerEnchere().recupererArticleEncherie(user);
+		
+		
 		if (listeParticipe != null) {
 			
 			for (int i = 0; i < listeParticipe.size(); i++) {

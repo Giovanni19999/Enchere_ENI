@@ -18,6 +18,10 @@ public class ManagerUtilisateur {
 		
 		if (id.contains("@")) {			
 			
+			
+			
+			
+
 			try {
 				base=c.selectByEmail(id);
 				
