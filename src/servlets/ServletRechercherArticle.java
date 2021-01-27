@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bo.BOCategorie;
 import exceptions.BusinessException;
+import managers.ManagerArticle;
 import managers.ManagerCategorie;
 import message.CodeErreur;
 
@@ -34,6 +35,7 @@ public class ServletRechercherArticle extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String categorie = request.getParameter("categorie");
 		
 		

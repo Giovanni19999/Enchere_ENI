@@ -49,7 +49,8 @@ public class ListCodeErreur {
 		CodeErreur code20104=new CodeErreur("20104", "Veiller rentrer une nouvelle email");
 		listeCode.add(11,code20104);
 		
-		
+		CodeErreur code20105=new CodeErreur("20105", "Catégorie invalide");
+		listeCode.add(12,code20105);
 	}
 	
 	public int appelListeExeption(){
