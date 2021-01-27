@@ -14,9 +14,9 @@ public class ManagerArticle {
 	
 	public BOArticle InsertArticle(BOArticle article) throws Exception {
 		
-		if (article.getDebut().isAfter(article.getFin())) {
-			throw INSER_DATE_INVERSER;
-		}
+		//if (article.getDebut().isAfter(article.getFin())) {
+			//throw INSER_DATE_INVERSER;
+		//}
 		
 		
 		ArticleDAOJdbc ArticleDAO = new ArticleDAOJdbc();
@@ -24,6 +24,7 @@ public class ManagerArticle {
 		ArticleDAO.InsertArticle(article);
 		
 		article.setNumero(selectNumArticle(article));
+		
 		return article;
 	}
 	
@@ -78,7 +79,7 @@ public class ManagerArticle {
 	}
 	
 	public int selectNumArticle(BOArticle art){
-		int num=new ArticleDAOJdbc().selectNumByArticle(art);
+		int num = new ArticleDAOJdbc().selectNumByArticle(art);
 		return num;
 	}
 	

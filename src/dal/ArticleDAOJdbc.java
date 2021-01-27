@@ -169,7 +169,7 @@ public class ArticleDAOJdbc {
 	public int selectNumByArticle(BOArticle art) {
 		int num=0;
 		try (Connection cnx = ConnectionProvider.getConnection()){
-			String sql = "SELECT no_article from ARTICLES_VENDUS WHERE ?=nom_article AND description=? AND date_debut_enchere=? AND date_fin_enchere=? AND prix_initial=? AND no_categorie=? AND etat_vente=?";
+			String sql = "SELECT no_article from ARTICLES_VENDUS WHERE nom_article=? AND description=? AND date_debut_enchere=? AND date_fin_enchere=? AND prix_initial=? AND no_categorie=?";
 			PreparedStatement stmt = cnx.prepareStatement(sql);
 			
 			
@@ -179,17 +179,16 @@ public class ArticleDAOJdbc {
 			stmt.setString(2, art.getDescription());
 			stmt.setTimestamp(3, new Timestamp(art.getDebut().getYear(), art.getDebut().getMonthValue()-1, art.getDebut().getDayOfMonth(), art.getDebut().getHour(), art.getDebut().getMinute(), art.getDebut().getSecond(), art.getDebut().getNano()) );
 			stmt.setTimestamp(4, new Timestamp(art.getFin().getYear(), art.getFin().getMonthValue()-1, art.getFin().getDayOfMonth(), art.getFin().getHour(), art.getFin().getMinute(), art.getFin().getSecond(), art.getFin().getNano()) );
-			stmt.setFloat(1, art.getPrixIni());
-			stmt.setInt(1, art.getCategorie().getNoCategorie());
-			stmt.setString(1, art.getEtatInit());
+			stmt.setFloat(5, art.getPrixIni());
+			stmt.setInt(6, art.getCategorie().getNoCategorie());
+			
 			
 			ResultSet rs = stmt.executeQuery();
 			rs.next();
 			
-			num=rs.getInt("no_article");
 			
+			num = rs.getInt("no_article");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return num;

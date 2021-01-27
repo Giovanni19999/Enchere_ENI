@@ -1,9 +1,5 @@
 package exceptions;
 
-
-import java.util.ArrayList;
-
-import message.CodeErreur;
 import message.ListCodeErreur;
 
 
@@ -16,7 +12,6 @@ public class BusinessException  {
 		ListCodeErreur instance=new ListCodeErreur();
 		int taille = instance.appelListeExeption();
 		String message = "";
-		int erreur;
 		for (int i = 0; i < taille; i++) {
 			
 			for (String code1 : codeSplit) {

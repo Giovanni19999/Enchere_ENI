@@ -31,18 +31,13 @@ public class ServletAfficherEnchere extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		ManagerArticle manager = new ManagerArticle();
 		BOArticle article = null;
-		
-		
-		
-		
 		
 		String numString = request.getParameter("noArticle");
 		article = manager.rechercheUnArticle(Integer.parseInt(numString));
 		request.setAttribute ("article",article);
-		
-		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Enchere.jsp");
 		if(rd != null) {rd.forward(request, response);}
@@ -55,7 +50,7 @@ public class ServletAfficherEnchere extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Enchere.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Encheres.jsp");
 		if(rd != null) {rd.forward(request, response);}
 	}
 
