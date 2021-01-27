@@ -101,17 +101,20 @@ public class ServletAjouterEnchere extends HttpServlet {
 		article.setUtilisateur(utilisateur);
 		
 		
-		BusinessException exeption = new BusinessException();
 		try {
 			article = manager.InsertArticle(article);
 			
-			request.setAttribute("noArticle", article.getNumero());
+			
+			request.setAttribute ("article",article);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Enchere.jsp");
 			if(rd != null) {rd.forward(request, response);}
-			
+						
 		} catch (Exception e) {
-			String erreur=exeption.lecteurMessage(e.getMessage());
-			request.setAttribute("erreur",erreur);
+			//String erreur=exeption.lecteurMessage(e.getMessage());
+			//request.setAttribute("erreur",erreur);
+			
+			doGet(request, response);
 		}
 	}
 
