@@ -54,8 +54,7 @@ public class ServletRetourAccueil extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Encheres.jsp");
-		if(rd != null) {rd.forward(request, response);}
+		doGet(request, response);
 	}
 
 }
