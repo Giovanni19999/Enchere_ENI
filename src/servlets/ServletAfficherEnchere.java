@@ -34,20 +34,14 @@ public class ServletAfficherEnchere extends HttpServlet {
 		ManagerArticle manager = new ManagerArticle();
 		BOArticle article = null;
 		
-		
-		
-		
-		
 		String numString = request.getParameter("noArticle");
-		if(numString !=null) {			
+		if(numString !=null) {	
 			article = manager.rechercheUnArticle(Integer.parseInt(numString));
 			request.setAttribute ("article",article);
+			System.out.println(article.getNom());
 		}
-		
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Enchere.jsp");
 		if(rd != null) {rd.forward(request, response);}
-		
 		
 	}
 
