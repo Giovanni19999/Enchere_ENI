@@ -59,6 +59,21 @@ public class ServletAfficherEnchere extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ManagerArticle manager = new ManagerArticle();
+		BOArticle article = null;
+		
+		String numString = request.getParameter("noArticle");
+		if(numString !=null) {	
+			article = manager.rechercheUnArticle(Integer.parseInt(numString));
+			request.setAttribute ("article",article);
+		}
+		
+		
+		request.setAttribute("vendeurNum", article.getUtilisateur().getNoUtilisateur());
+		request.setAttribute("vendeurPseudo", article.getUtilisateur().getPseudo());
+		request.setAttribute("vendeurRue", article.getUtilisateur().getRue());
+		request.setAttribute("vendeurCodePostal", article.getUtilisateur().getCodePostal());
+		request.setAttribute("vendeurVille", article.getUtilisateur().getVille());
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Enchere.jsp");
 		if(rd != null) {rd.forward(request, response);}

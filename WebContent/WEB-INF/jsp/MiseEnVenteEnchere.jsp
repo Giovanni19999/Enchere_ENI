@@ -31,7 +31,6 @@
 			<li><input type="number" min="0" step="0.01" name="prixenchere" placeholder="Prix initial de votre enchère" required="required"></li>
 			<li><input type="datetime-local" min="${requestScope.dateMaintenant }" name="datedebutenchere" placeholder="Date et heure du lancement de l'enchère" size="45" required="required"></li>
 			<li><input type="datetime-local" min="${requestScope.dateMaintenant }" name="datefinenchere" placeholder="Date et heure de fin de l'enchère" size="45" required="required"></li>
-			<li><input type="text" name="adresseretraitenchere" placeholder="Adresse ou l'article est vendu" size="45" required="required"></li>
 			<li><textarea name="descriptionenchere" placeholder="Description de votre enchère (600 charactères max.)" rows="6" cols="100" autocapitalize="on" required="required"></textarea></li>
 		</ul>
 		

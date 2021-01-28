@@ -86,7 +86,6 @@ public class ServletAjouterEnchere extends HttpServlet {
 		BOCategorie categorie = new BOCategorie();
 		categorie.setNoCategorie(Integer.parseInt(request.getParameter("categorie")));
 		
-		
 		HttpSession session = request.getSession();
 		BOUtilisateur utilisateur = null;
 		utilisateur = (BOUtilisateur) session.getAttribute("utilisateur");
@@ -95,18 +94,14 @@ public class ServletAjouterEnchere extends HttpServlet {
 		article.setCategorie(categorie);
 		article.setDebut(LocalDateTime.parse(request.getParameter("datedebutenchere") + ":00"));
 		article.setFin(LocalDateTime.parse(request.getParameter("datefinenchere") + ":00"));
-		article.setAdresse(request.getParameter("adresseretraitenchere"));
 		article.setDescription(request.getParameter("descriptionenchere"));
 		article.setPrixIni(Float.parseFloat((request.getParameter("prixenchere"))));
 		article.setUtilisateur(utilisateur);
 		
-		
 		try {
 			article = manager.InsertArticle(article);
 			
-			request.setAttribute ("article",article);
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Enchere.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/afficher/enchere?noArticle="+article.getNumero());
 			if(rd != null) {rd.forward(request, response);}
 						
 		} catch (Exception e) {
