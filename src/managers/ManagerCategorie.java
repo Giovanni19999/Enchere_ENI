@@ -13,7 +13,6 @@ public class ManagerCategorie {
 		CategorieDAOJdbc dal=new CategorieDAOJdbc();
 		liste= dal.selectAll();
 		for (BOCategorie boCategorie : liste) {
-			System.out.println(boCategorie.toString());
 		}
 		return liste;
 	}

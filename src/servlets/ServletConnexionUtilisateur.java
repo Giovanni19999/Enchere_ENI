@@ -54,24 +54,7 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if(request.getParameter("resterconnecter") != null){
-			Cookie cookie = new Cookie("saveUser",request.getParameter("identifiant"));
-			response.addCookie(cookie);
-			request.setAttribute("user", cookie.getValue());
-		} else {
-			Cookie[] cookies = request.getCookies();
-			for(Cookie cookie:cookies) {
-				if(cookie.getName().equals("saveUser")) {
-					cookie.setValue("");
-					cookie.setMaxAge(-1);
-					response.addCookie(cookie);
-					request.setAttribute("user", cookie.getValue());
-				}
-			}
-		}
-		
-		
+				
 		ManagerUtilisateur connexionManager = new ManagerUtilisateur();
 		HttpSession session = request.getSession();
 		BusinessException exeption = new BusinessException();
@@ -80,15 +63,41 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 			utilisateur = connexionManager.validationConnection(request.getParameter("identifiant"), request.getParameter("mdp"));
 	
 			session.setAttribute("utilisateur", utilisateur);
-	
-			//getServletContext().getRequestDispatcher("/retour/encheres").forward(request, response);
+			
+			if(request.getParameter("resterconnecter") != null){
+				Cookie cookie = new Cookie("saveUser",request.getParameter("identifiant"));
+				response.addCookie(cookie);
+				request.setAttribute("user", cookie.getValue());
+			} else {
+				Cookie[] cookies = request.getCookies();
+				for(Cookie cookie:cookies) {
+					if(cookie.getName().equals("saveUser")) {
+						cookie.setValue("");
+						cookie.setMaxAge(-1);
+						response.addCookie(cookie);
+						request.setAttribute("user", cookie.getValue());
+					}
+				}
+			}
+			
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Encheres.jsp");
 			if(rd != null) {rd.forward(request, response);}
 
 		} catch (Exception e) {
 			
+			Cookie[] cookies = request.getCookies();
+			String user = null;
+			for(Cookie cookie:cookies) {
+				if(cookie.getName().equals("saveUser")) {
+					user = cookie.getValue();
+					cookie.setValue(user);
+					response.addCookie(cookie);
+					request.setAttribute("user", cookie.getValue());
+				}
+			}
+			
 			String erreur=exeption.lecteurMessage(e.getMessage());
-			System.err.println(erreur);
 			request.setAttribute("erreur",erreur);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/FormulaireDeConnexion.jsp");

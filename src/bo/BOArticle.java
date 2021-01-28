@@ -9,7 +9,6 @@ public class BOArticle {
 	private BOCategorie categorie;
 	private LocalDateTime debut;
 	private LocalDateTime fin;
-	private String adresse;
 	private String description;
 	private BOUtilisateur utilisateur;
 	private float prixIni;
@@ -64,15 +63,6 @@ public class BOArticle {
 	/**
 	 * @return the adresse
 	 */
-	public final String getAdresse() {
-		return adresse;
-	}
-	/**
-	 * @param adresse the adresse to set
-	 */
-	public final void setAdresse(String adresse) {
-		this.adresse = adresse;
-	}
 	public String getDescription() {
 		return description;
 	}

@@ -45,14 +45,14 @@ public class ArticleDAOJdbc {
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			
 		
-			String sql = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=? AND nom_article LIKE '%?%'";
+			String sql = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=? AND nom_article LIKE ?";
 			
 			
 			
 			PreparedStatement stmt = cnx.prepareStatement(sql);
 			
 			stmt.setInt(1, cat);
-			stmt.setString(2, rec);
+			stmt.setString(2, "%"+rec+"%");
 			
 			ResultSet rs = stmt.executeQuery();
 			
@@ -108,7 +108,6 @@ public class ArticleDAOJdbc {
 			art.setUtilisateur(new UtilisateurDAOJdbc().selectById(rs.getInt("no_utilisateur")));
 			art.setCategorie(new CategorieDAOJdbc().selectById(rs.getInt("no_categorie")));
 			art.setEtatInit(rs.getString("etat_vente"));
-			System.out.println("bon");
 				
 			
 		
@@ -133,15 +132,11 @@ public class ArticleDAOJdbc {
 				String sql = "SELECT * from ARTICLES_VENDUS WHERE nom_article LIKE ? ";
 				
 				
-				System.out.println(rec);
 				PreparedStatement stmt = cnx.prepareStatement(sql);
 				
-				System.out.println("je suis là");
-				System.out.println(stmt);
 				
 				stmt.setString(1, "%"+ rec+"%");
 				
-				System.out.println("je suis là");
 				ResultSet rs = stmt.executeQuery();
 				
 				while(rs.next()) {
@@ -180,8 +175,8 @@ public class ArticleDAOJdbc {
 			
 			stmt.setString(1, art.getNom());
 			stmt.setString(2, art.getDescription());
-			stmt.setTimestamp(3, new Timestamp(art.getDebut().getYear(), art.getDebut().getMonthValue()-1, art.getDebut().getDayOfMonth(), art.getDebut().getHour(), art.getDebut().getMinute(), art.getDebut().getSecond(), art.getDebut().getNano()) );
-			stmt.setTimestamp(4, new Timestamp(art.getFin().getYear(), art.getFin().getMonthValue()-1, art.getFin().getDayOfMonth(), art.getFin().getHour(), art.getFin().getMinute(), art.getFin().getSecond(), art.getFin().getNano()) );
+			stmt.setTimestamp(3, new Timestamp(art.getDebut().getYear()-1900, art.getDebut().getMonthValue()-1, art.getDebut().getDayOfMonth(), art.getDebut().getHour(), art.getDebut().getMinute(), art.getDebut().getSecond(), art.getDebut().getNano()) );
+			stmt.setTimestamp(4, new Timestamp(art.getFin().getYear()-1900, art.getFin().getMonthValue()-1, art.getFin().getDayOfMonth(), art.getFin().getHour(), art.getFin().getMinute(), art.getFin().getSecond(), art.getFin().getNano()) );
 			stmt.setFloat(5, art.getPrixIni());
 			stmt.setInt(6, art.getCategorie().getNoCategorie());
 			

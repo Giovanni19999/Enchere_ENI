@@ -15,9 +15,9 @@ public class ManagerArticle {
 	
 	public BOArticle InsertArticle(BOArticle article) throws Exception {
 		
-		//if (article.getDebut().isAfter(article.getFin())) {
-			//throw INSER_DATE_INVERSER;
-		//}
+		if (article.getDebut().isAfter(article.getFin())) {
+			throw INSER_DATE_INVERSER;
+		}
 		
 		
 		ArticleDAOJdbc ArticleDAO = new ArticleDAOJdbc();
@@ -32,12 +32,12 @@ public class ManagerArticle {
 	public ArrayList<BOArticle> rechecheArticle(String saisie, String cat){
 		ArrayList<BOArticle> liste=null;
 		
-		
+		ArticleDAOJdbc dal = new ArticleDAOJdbc();
 		
 		if (cat.isEmpty()) {
 			liste=new ArticleDAOJdbc().selctByRecherche(saisie);
 		}else {
-			liste=new ArticleDAOJdbc().selctByCat(saisie, Integer.parseInt(cat));
+			liste=dal.selctByCat(saisie, Integer.parseInt(cat));
 		}
 		
 		
@@ -48,24 +48,34 @@ public class ManagerArticle {
 	public ArrayList<BOArticle> rechecheArticleCo(String saisie, String cat,BOUtilisateur user){
 		ArrayList<BOArticle> listeRecherche=rechecheArticle(saisie,cat);
 		ArrayList<BOArticle> listeParticipe=new ManagerEnchere().recupererArticleEncherie(user);
-		
+		ArrayList<BOArticle> indice =new ArrayList<BOArticle>();
 		
 		if (listeParticipe != null) {
 			
-			for (int i = 0; i < listeParticipe.size(); i++) {
-				if (!listeRecherche.contains(listeParticipe.get(i))){
-					listeParticipe.remove(i);
+			for (BOArticle boArticle : listeParticipe) {
+				
+			 
+				for (BOArticle boArticle2 : listeRecherche) {
+					
+				
+					if (boArticle.getNumero()==boArticle2.getNumero()){
+						indice.add(boArticle2);
+					}
 				}
 			}
-			listeRecherche.removeAll(listeParticipe);
 			
-			listeParticipe.addAll(listeRecherche);
+			
+			for (BOArticle boArticle : indice) {
+				listeRecherche.remove(boArticle);
+			};
+			
+			indice.addAll(listeRecherche);
 			
 		
 		}else {
-			listeParticipe=listeRecherche;
+			indice=listeRecherche;
 		}
-		return listeParticipe;
+		return indice;
 	}
 	
 	

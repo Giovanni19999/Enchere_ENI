@@ -67,9 +67,7 @@ public class ServletAjouterEnchere extends HttpServlet {
 			formatMin = dateString.getMinute() + "";
 		}
 		
-		System.out.println(dateString.getYear());
 		String dateStringFormater = dateString.getYear() + "-" + formatMonth + "-" + formatDay + "T" + formatHour + ":" + formatMin;
-		System.out.println(dateStringFormater);
 		request.setAttribute("dateMaintenant", dateStringFormater);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/MiseEnVenteEnchere.jsp");
@@ -82,10 +80,9 @@ public class ServletAjouterEnchere extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ManagerArticle manager = new ManagerArticle();
 		BOArticle article = new BOArticle();
-		
+		BusinessException exeption = new BusinessException();
 		BOCategorie categorie = new BOCategorie();
 		categorie.setNoCategorie(Integer.parseInt(request.getParameter("categorie")));
-		
 		
 		HttpSession session = request.getSession();
 		BOUtilisateur utilisateur = null;
@@ -95,24 +92,19 @@ public class ServletAjouterEnchere extends HttpServlet {
 		article.setCategorie(categorie);
 		article.setDebut(LocalDateTime.parse(request.getParameter("datedebutenchere") + ":00"));
 		article.setFin(LocalDateTime.parse(request.getParameter("datefinenchere") + ":00"));
-		article.setAdresse(request.getParameter("adresseretraitenchere"));
 		article.setDescription(request.getParameter("descriptionenchere"));
 		article.setPrixIni(Float.parseFloat((request.getParameter("prixenchere"))));
 		article.setUtilisateur(utilisateur);
 		
-		
 		try {
 			article = manager.InsertArticle(article);
 			
-			
-			request.setAttribute ("article",article);
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Enchere.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/afficher/enchere?noArticle="+article.getNumero());
 			if(rd != null) {rd.forward(request, response);}
 						
 		} catch (Exception e) {
-			//String erreur=exeption.lecteurMessage(e.getMessage());
-			//request.setAttribute("erreur",erreur);
+			String erreur=exeption.lecteurMessage(e.getMessage());
+			request.setAttribute("erreur",erreur);
 			
 			doGet(request, response);
 		}

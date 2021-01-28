@@ -48,7 +48,7 @@
 						 <select name="categorie">
 							<option value="">--Choisissez une catégorie--</option>
 							<c:forEach items="${sessionScope.Categories}" var="i">
-								<option value="${i}">${i}</option>
+								<option value="${i.noCategorie}">${i.libeler}</option>
 							</c:forEach>
 						</select> 
 				<input type="submit" name="recherche" value="rechercher">

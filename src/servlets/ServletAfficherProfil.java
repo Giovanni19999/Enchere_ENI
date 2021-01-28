@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bo.BOUtilisateur;
+import managers.ManagerUtilisateur;
+
 
 /**
  * Servlet implementation class ServletAfficherProfil
@@ -37,8 +40,15 @@ public class ServletAfficherProfil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		ManagerUtilisateur manager = new ManagerUtilisateur();
+		BOUtilisateur user = null;
 		
+		String num = request.getParameter("profil");
+		user = manager.trouverUtilisateur(Integer.parseInt(num));
+		
+		request.setAttribute("user", user);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AfficherProfil.jsp");
+		if(rd != null) {rd.forward(request, response);}
 	}
 
 }

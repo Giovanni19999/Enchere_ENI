@@ -23,5 +23,6 @@
 		<label for="resterconnecter">Enregistrer mon identifiant</label>
 		<input type="checkbox" name="resterconnecter" value="resterconnecter" <c:if test="${!empty requestScope.user}">checked="checked" </c:if>>
 	</form>
+	<a href="${pageContext.request.contextPath}/compte/creation">Créer un compte</a>
 </body>
 </html>

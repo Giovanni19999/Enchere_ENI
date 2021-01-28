@@ -13,8 +13,9 @@
 			<c:forEach items="${requestScope.article}" var="i"> 
 			
 				 <li><a href="${pageContext.request.contextPath}/afficher/enchere?noArticle=${i.numero}"> 
-				${i.nom} ${i.debut} ${i.fin}<br>
-				${i.description}<br>
+				${i.nom}<br>
+				Début de l'enchère le : ${i.debut.dayOfMonth}/${i.debut.monthValue}/${i.debut.year} à ${i.debut.hour}:${i.debut.minute}<br>
+				Fin de l'enchère le : ${i.fin.dayOfMonth}/${i.fin.monthValue}/${i.fin.year} à ${i.fin.hour}:${i.fin.minute}<br><br>
 				</a> </li>
 			</c:forEach>
 			
