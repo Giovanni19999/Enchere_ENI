@@ -10,4 +10,7 @@ public abstract class CodeResultatManager {
 	public final int MODIFIER_MDP_IDENTIQUE=20101;
 	public final int MODIFIER_EMAIL_INCORRECT=20102;
 	public final int MODIFIER_EMAIL_IDENTIQUE=20103;
+	
+	//managers enchere
+	public final int MODIFIER_MONTANT_IDENTIQUE=23000;
 }

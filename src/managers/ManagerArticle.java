@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import bo.BOArticle;
 import bo.BOCategorie;
+import bo.BOEnchere;
 import bo.BOUtilisateur;
 import dal.ArticleDAOJdbc;
 
@@ -82,6 +83,11 @@ public class ManagerArticle {
 		int num = new ArticleDAOJdbc().selectNumByArticle(art);
 		return num;
 	}
+	
+	Exception MODIFIER_MONTANT_IDENTIQUE = new Exception("23000");
+		
+
+
 	
 	
 }
