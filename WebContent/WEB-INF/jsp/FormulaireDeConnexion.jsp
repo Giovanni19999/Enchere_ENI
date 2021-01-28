@@ -21,5 +21,6 @@
 			<li><input type="submit" value="Se connecter"></li>
 		</ul>
 	</form>
+	<a href="${pageContext.request.contextPath}/compte/creation">Créer un compte</a>
 </body>
 </html>

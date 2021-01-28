@@ -49,6 +49,15 @@ public class ListCodeErreur {
 		CodeErreur code20104=new CodeErreur("20104", "Veiller rentrer une nouvelle email");
 		listeCode.add(11,code20104);
 		
+		CodeErreur code20300=new CodeErreur("20300", "Les deux mots de passe ne sont pas identiques");
+		listeCode.add(12,code20300);
+		
+		CodeErreur code20301=new CodeErreur("20301", "Pseudo déjà utilisé");
+		listeCode.add(13,code20301);
+		
+		CodeErreur code20302=new CodeErreur("20302", "Email déjà utilisé");
+		listeCode.add(14,code20302);
+		
 		
 	}
 	
