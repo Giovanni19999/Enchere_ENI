@@ -3,6 +3,7 @@ package managers;
 import java.util.ArrayList;
 
 import bo.BOArticle;
+import bo.BOEnchere;
 import bo.BOUtilisateur;
 import dal.ArticleDAOJdbc;
 import dal.EnchereDAOJdbc;
@@ -28,6 +29,11 @@ public class ManagerEnchere {
 		}
 		
 		return listeArt;
+		
+	}
+	public BOEnchere modifierEnchere(BOEnchere enchere, BOEnchere mod) {
+		
+		return mod;
 		
 	}
 }
