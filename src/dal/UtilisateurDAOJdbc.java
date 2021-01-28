@@ -179,5 +179,31 @@ public class UtilisateurDAOJdbc {
 			new Exception("10100");
 		}
 	}
+	
+	public void insertById(int id) throws SQLException {
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			String sql = "INSERT into UTILISATEURS";
+			BOUtilisateur c = null;
+			
+			PreparedStatement stmt = cnx.prepareStatement(sql);
+			stmt.setInt(1,id);
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			c = new BOUtilisateur();
+			c.setPseudo("pseudo");
+			c.setNom("nom");
+			c.setPrenom("prenom");
+			c.setEmail("email");
+			c.setTelephone("telephone");
+			c.setRue("rue");
+			c.setCodePostal("codePostal");
+			c.setVille("ville");
+			c.setMdp("mdp");
+			
+		} catch(Exception e) {
+			new Exception("10200");
+		}
+		
+	}
 
 }

@@ -7,6 +7,7 @@
         <title>Inscription</title>
     </head>
     <body>
+   
         <form method="post" action="${pageContext.request.contextPath}/compte/creation">
             <fieldset>
                 <h1>Inscription</h1>

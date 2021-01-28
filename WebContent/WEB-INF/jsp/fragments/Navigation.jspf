@@ -14,13 +14,16 @@
 				<c:when test="${empty sessionScope.utilisateur}">
 					<!-- s'il ne trouve pas le pseudo (non connecté) -->
 					<form
-						action="${pageContext.request.contextPath}/connexion/utilisateur"
-						method="get">
+						action="${pageContext.request.contextPath}/connexion/utilisateur" method="get">
 						<!-- on fais apparaitre le bouton connexion -->
 						<input type="submit" name="connexion" value="Connexion">
 					</form>
+				
+				<!-- bouton inscription toujours présent dans le nav -->
+					<form action="${pageContext.request.contextPath}/compte/creation" method="get">
+						<input type="submit" name="Inscription" value="Inscription">
+					</form>
 				</c:when>
-
 				<c:otherwise>
 					<!-- Sinon -->
 					<form action="${pageContext.request.contextPath}/profil/afficher"
@@ -30,7 +33,11 @@
 						<a href="${pageContext.request.contextPath}/retour/encheres"><input
 							type="button" name="accueil" value="Accueil"></a>
 					</form>
-
+					<!-- bouton inscription toujours présent dans le nav -->
+					<form action="${pageContext.request.contextPath}/compte/creation" method="get">
+						<input type="submit" name="Inscription" value="Inscription">
+					</form>
+					
 					<form action="${pageContext.request.contextPath}/retour/encheres"
 						method="post">
 						<input type="submit" name="deconnexion" value="Se déconnecter">

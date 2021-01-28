@@ -10,5 +10,7 @@ public abstract class CodeResultatDal {
 	
 	public final int UPDATE_BY_ID=10100;
 	
+	public final int INSERT_BY_ID=10200;
+	
 	
 }
