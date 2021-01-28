@@ -45,14 +45,14 @@ public class ArticleDAOJdbc {
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			
 		
-			String sql = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=? AND nom_article LIKE '%?%'";
+			String sql = "SELECT * from ARTICLES_VENDUS WHERE no_categorie=? AND nom_article LIKE ?";
 			
 			
 			
 			PreparedStatement stmt = cnx.prepareStatement(sql);
 			
 			stmt.setInt(1, cat);
-			stmt.setString(2, rec);
+			stmt.setString(2, "%"+rec+"%");
 			
 			ResultSet rs = stmt.executeQuery();
 			
