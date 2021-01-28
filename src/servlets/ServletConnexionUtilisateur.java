@@ -80,7 +80,7 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 				}
 			}
 			
-			//getServletContext().getRequestDispatcher("/retour/encheres").forward(request, response);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Encheres.jsp");
 			if(rd != null) {rd.forward(request, response);}
 
