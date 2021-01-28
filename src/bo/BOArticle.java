@@ -4,16 +4,21 @@ import java.time.LocalDateTime;
 
 
 public class BOArticle {
+	private int numero;
 	private String nom;
 	private BOCategorie categorie;
 	private LocalDateTime debut;
 	private LocalDateTime fin;
-	private String adresse;
 	private String description;
 	private BOUtilisateur utilisateur;
-	private int prixIni;
+	private float prixIni;
+	private String etatInit;
+	private String etatComp;
 	
 	
+	
+
+
 	public BOArticle() {
 		super();
 	}
@@ -58,25 +63,16 @@ public class BOArticle {
 	/**
 	 * @return the adresse
 	 */
-	public final String getAdresse() {
-		return adresse;
-	}
-	/**
-	 * @param adresse the adresse to set
-	 */
-	public final void setAdresse(String adresse) {
-		this.adresse = adresse;
-	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getPrixIni() {
+	public float getPrixIni() {
 		return prixIni;
 	}
-	public void setPrixIni(int prixIni) {
+	public void setPrixIni(float prixIni) {
 		this.prixIni = prixIni;
 	}
 	public BOUtilisateur getUtilisateur() {
@@ -91,6 +87,87 @@ public class BOArticle {
 	public void setCategorie(BOCategorie categorie) {
 		this.categorie = categorie;
 	}
+
+
+	/**
+	 * @return the numero
+	 */
+	public int getNumero() {
+		return numero;
+	}
+
+
+	/**
+	 * @param numero the numero to set
+	 */
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+
+	/**
+	 * @return the etatInit
+	 */
+	public String getEtatInit() {
+		String tampon;
+		if (etatInit.isBlank() || etatInit.isEmpty()) {
+			if (etatComp.equalsIgnoreCase("creer")) {
+				tampon="CR";
+			}else if (etatComp.equalsIgnoreCase("en cours")) {
+				tampon="EC";
+			}else if (etatComp.equalsIgnoreCase("vendu")) {
+				tampon="VD";
+			}else {
+				tampon="RT";
+			}
+		}else {
+			tampon=etatInit;
+		}
+		return tampon;
+	}
+
+
+	/**
+	 * @param etatInit the etatInit to set
+	 */
+	public void setEtatInit(String etatInit) {
+		this.etatInit = etatInit;
+	}
+
+
+	/**
+	 * @return the etatComp
+	 */
+	public String getEtatComp() {
+		String tampon;
+		if (etatComp.isBlank() || etatComp.isEmpty()) {
+			if (etatInit.equalsIgnoreCase("CR")) {
+				tampon="creer";
+			}else if (etatInit.equalsIgnoreCase("EC")) {
+				tampon="en cours";
+			}else if (etatInit.equalsIgnoreCase("VD")) {
+				tampon="vendu";
+			}else {
+				tampon="";
+			}
+		}else {
+			tampon=etatComp;
+		}
+		return tampon;
+		
+		
+	}
+
+
+	/**
+	 * @param etatComp the etatComp to set
+	 */
+	public void setEtatComp(String etatComp) {
+		this.etatComp = etatComp;
+		
+	}
+	
+	
 	
 
 }

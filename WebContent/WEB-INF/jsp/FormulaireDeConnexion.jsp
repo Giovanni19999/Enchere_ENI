@@ -15,11 +15,13 @@
 	
 	<form action="${pageContext.request.contextPath}/connexion/utilisateur" method="post">
 		<ul>
-			<li>Pseudo ou Email <input type="text" name="identifiant" placeholder="Pseudo ou Email"><br><br></li>
+			<li>Pseudo ou Email <input type="text" value="${requestScope.user}" name="identifiant" placeholder="Pseudo ou Email"><br><br></li>
 			<li>Mot de passe <input type="password" name="mdp" placeholder="Mot de passe"><br><br></li>
 			
 			<li><input type="submit" value="Se connecter"></li>
 		</ul>
+		<label for="resterconnecter">Enregistrer mon identifiant</label>
+		<input type="checkbox" name="resterconnecter" value="resterconnecter" <c:if test="${!empty requestScope.user}">checked="checked" </c:if>>
 	</form>
 	<a href="${pageContext.request.contextPath}/compte/creation">Créer un compte</a>
 </body>

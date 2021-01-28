@@ -18,6 +18,10 @@ public class ManagerUtilisateur {
 		
 		if (id.contains("@")) {			
 			
+			
+			
+			
+
 			try {
 				base=c.selectByEmail(id);
 				
@@ -39,7 +43,6 @@ public class ManagerUtilisateur {
 				base=c.selectByPseudo(id);
 				
 				if (!mdp.equals(base.getMdp())) {
-					System.out.println("erreur");
 				
 					throw connexionPseudo;
 				}
@@ -102,7 +105,7 @@ public class ManagerUtilisateur {
 			
 			if ( (!newMdp.isBlank()||!newMdp.isEmpty())) {
 				if (!preMod.getMdp().equals(newMdp)) {
-					preMod.setMdp(newMdp);
+					postMod.setMdp(newMdp);
 				}else {
 					throw MODIFIER_MDP_IDENTIQUE;
 				}
@@ -131,9 +134,25 @@ public class ManagerUtilisateur {
 		/*dal delete by Id*/
 	}
 	
+
 	Exception CREATION_MOTDEPASSE_PAS_IDENTIQUE = new Exception("20300");
 	Exception CREATION_PSEUDO_DEJA_CREE = new Exception("20301");
 	Exception CREATION_EMAIL_DEJA_CREE = new Exception("20302");
+
+	public BOUtilisateur trouverUtilisateur (int numero) {
+		BOUtilisateur user = null;
+		UtilisateurDAOJdbc c = new UtilisateurDAOJdbc();
+		
+		try {
+			user = c.selectById(numero);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+	
 	
 	
 	public void creationUtilisateur (BOUtilisateur user, String mdpConf) throws Exception {

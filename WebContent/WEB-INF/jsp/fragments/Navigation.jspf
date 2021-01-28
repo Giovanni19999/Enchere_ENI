@@ -1,42 +1,59 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<style><%@include file="/css/header.css"%></style>
-<head>
-<meta charset="UTF-8">
-<title>Navigation</title>
-</head>
+<style>
+<%@include file="/css/header.css"%>
+</style>
+
 <body>
 
 	<header class="navigationHader">
 		<nav>
 			<!-- Si l'utilisateur n'est pas connecté, on fais apparaitre le bouton connexion, sinon on affiche le pseudo et on cache le bouton connexion -->
 			<c:choose>
-				<c:when test="${empty sessionScope.utilisateur}"> <!-- s'il ne trouve pas le pseudo (non connecté) -->
-					<form action="${pageContext.request.contextPath}/connexion/utilisateur" method="get">
+				<c:when test="${empty sessionScope.utilisateur}">
+					<!-- s'il ne trouve pas le pseudo (non connecté) -->
+					<form
+						action="${pageContext.request.contextPath}/connexion/utilisateur"
+						method="get">
 						<!-- on fais apparaitre le bouton connexion -->
 						<input type="submit" name="connexion" value="Connexion">
 					</form>
 				</c:when>
 
-				<c:otherwise> <!-- Sinon -->
-					<form action="${pageContext.request.contextPath}/profil/afficher" method="get">
+				<c:otherwise>
+					<!-- Sinon -->
+					<form action="${pageContext.request.contextPath}/profil/afficher"
+						method="get">
 						<!-- on fais apparaitre le bouton connexion -->
 						<input type="submit" name="afficherprofil" value="Mon profil">
-						<a href="${pageContext.request.contextPath}/retour/encheres"><input type="button" name="accueil" value="Accueil"></a>
+						<a href="${pageContext.request.contextPath}/retour/encheres"><input
+							type="button" name="accueil" value="Accueil"></a>
 					</form>
-					
-					<form action="${pageContext.request.contextPath}/retour/encheres" method="post">
+
+					<form action="${pageContext.request.contextPath}/retour/encheres"
+						method="post">
 						<input type="submit" name="deconnexion" value="Se déconnecter">
 					</form>
+
+					<a href="${pageContext.request.contextPath}/encheres/ajouter"><input
+						type="button" name="Vendre" value="Vendre"></a>
 					
+							
 					${sessionScope.utilisateur.pseudo} <!-- On affiche le pseudo et on cache le bouton connexion -->
 				</c:otherwise>
 			</c:choose>
+			<form action="${pageContext.request.contextPath}/article/rechercher" method="get">
+				<input type="search" name="nomRecherche" placeholder="Que recherchez vous ?">
+						 <select name="categorie">
+							<option value="">--Choisissez une catégorie--</option>
+							<c:forEach items="${sessionScope.Categories}" var="i">
+								<option value="${i.noCategorie}">${i.libeler}</option>
+							</c:forEach>
+						</select> 
+				<input type="submit" name="recherche" value="rechercher">
+			</form>
 		</nav>
 	</header>
 
 </body>
-</html>

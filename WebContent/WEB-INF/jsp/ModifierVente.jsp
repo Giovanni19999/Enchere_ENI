@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mise en vente d'enchères</title>
+<title>Modifier la vente</title>
 </head>
 <body>
+	<h1>Modifier la vente</h1>
+	
 
 </body>
 </html>
