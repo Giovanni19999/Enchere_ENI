@@ -46,8 +46,6 @@ public class ServletAfficherProfil extends HttpServlet {
 		String num = request.getParameter("profil");
 		user = manager.trouverUtilisateur(Integer.parseInt(num));
 		
-		System.out.println(user);
-		
 		request.setAttribute("user", user);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AfficherProfil.jsp");
 		if(rd != null) {rd.forward(request, response);}

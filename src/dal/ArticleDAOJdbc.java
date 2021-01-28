@@ -108,7 +108,6 @@ public class ArticleDAOJdbc {
 			art.setUtilisateur(new UtilisateurDAOJdbc().selectById(rs.getInt("no_utilisateur")));
 			art.setCategorie(new CategorieDAOJdbc().selectById(rs.getInt("no_categorie")));
 			art.setEtatInit(rs.getString("etat_vente"));
-			System.out.println("bon");
 				
 			
 		
@@ -133,15 +132,11 @@ public class ArticleDAOJdbc {
 				String sql = "SELECT * from ARTICLES_VENDUS WHERE nom_article LIKE ? ";
 				
 				
-				System.out.println(rec);
 				PreparedStatement stmt = cnx.prepareStatement(sql);
 				
-				System.out.println("je suis là");
-				System.out.println(stmt);
 				
 				stmt.setString(1, "%"+ rec+"%");
 				
-				System.out.println("je suis là");
 				ResultSet rs = stmt.executeQuery();
 				
 				while(rs.next()) {

@@ -74,7 +74,6 @@ public class ServletModifierProfil extends HttpServlet {
 			BusinessException exeption = new BusinessException();
 			
 			String erreur=exeption.lecteurMessage(e.getMessage());
-			System.err.println(erreur);
 			request.setAttribute("erreur",erreur);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ModifierProfil.jsp");

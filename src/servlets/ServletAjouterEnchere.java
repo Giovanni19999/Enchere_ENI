@@ -67,9 +67,7 @@ public class ServletAjouterEnchere extends HttpServlet {
 			formatMin = dateString.getMinute() + "";
 		}
 		
-		System.out.println(dateString.getYear());
 		String dateStringFormater = dateString.getYear() + "-" + formatMonth + "-" + formatDay + "T" + formatHour + ":" + formatMin;
-		System.out.println(dateStringFormater);
 		request.setAttribute("dateMaintenant", dateStringFormater);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/MiseEnVenteEnchere.jsp");

@@ -88,7 +88,6 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 		} catch (Exception e) {
 			
 			String erreur=exeption.lecteurMessage(e.getMessage());
-			System.err.println(erreur);
 			request.setAttribute("erreur",erreur);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/FormulaireDeConnexion.jsp");

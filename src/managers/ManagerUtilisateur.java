@@ -43,7 +43,6 @@ public class ManagerUtilisateur {
 				base=c.selectByPseudo(id);
 				
 				if (!mdp.equals(base.getMdp())) {
-					System.out.println("erreur");
 				
 					throw connexionPseudo;
 				}
