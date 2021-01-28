@@ -104,7 +104,6 @@ public class ServletAjouterEnchere extends HttpServlet {
 		try {
 			article = manager.InsertArticle(article);
 			
-			
 			request.setAttribute ("article",article);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Enchere.jsp");

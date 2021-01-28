@@ -135,6 +135,20 @@ public class ManagerUtilisateur {
 		/*dal delete by Id*/
 	}
 	
+	public BOUtilisateur trouverUtilisateur (int numero) {
+		BOUtilisateur user = null;
+		UtilisateurDAOJdbc c = new UtilisateurDAOJdbc();
+		
+		try {
+			user = c.selectById(numero);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+	
 	
 	
 	
