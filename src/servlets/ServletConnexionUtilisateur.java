@@ -81,7 +81,7 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 	
 			session.setAttribute("utilisateur", utilisateur);
 	
-			//getServletContext().getRequestDispatcher("/retour/encheres").forward(request, response);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Encheres.jsp");
 			if(rd != null) {rd.forward(request, response);}
 

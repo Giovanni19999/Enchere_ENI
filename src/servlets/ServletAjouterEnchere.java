@@ -80,7 +80,7 @@ public class ServletAjouterEnchere extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ManagerArticle manager = new ManagerArticle();
 		BOArticle article = new BOArticle();
-		
+		BusinessException exeption = new BusinessException();
 		BOCategorie categorie = new BOCategorie();
 		categorie.setNoCategorie(Integer.parseInt(request.getParameter("categorie")));
 		
@@ -103,8 +103,8 @@ public class ServletAjouterEnchere extends HttpServlet {
 			if(rd != null) {rd.forward(request, response);}
 						
 		} catch (Exception e) {
-			//String erreur=exeption.lecteurMessage(e.getMessage());
-			//request.setAttribute("erreur",erreur);
+			String erreur=exeption.lecteurMessage(e.getMessage());
+			request.setAttribute("erreur",erreur);
 			
 			doGet(request, response);
 		}

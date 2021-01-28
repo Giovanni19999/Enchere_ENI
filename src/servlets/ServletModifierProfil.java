@@ -59,11 +59,7 @@ public class ServletModifierProfil extends HttpServlet {
 
 		try {
 			
-				utilisateur = mngUtilisateur.modifierUtillisateur((BOUtilisateur)session.getAttribute("utilisateur"), utilisateur, request.getParameter("emailconfirmation"), request.getParameter("mdpconfirmation"));
-			
-				// TODO Auto-generated catch block
-				
-			
+			utilisateur = mngUtilisateur.modifierUtillisateur((BOUtilisateur)session.getAttribute("utilisateur"), utilisateur, request.getParameter("emailconfirmation"), request.getParameter("mdpconfirmation"));
 			
 			
 			session.setAttribute("utilisateur", utilisateur);

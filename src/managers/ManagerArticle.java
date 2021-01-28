@@ -14,9 +14,9 @@ public class ManagerArticle {
 	
 	public BOArticle InsertArticle(BOArticle article) throws Exception {
 		
-		//if (article.getDebut().isAfter(article.getFin())) {
-			//throw INSER_DATE_INVERSER;
-		//}
+		if (article.getDebut().isAfter(article.getFin())) {
+			throw INSER_DATE_INVERSER;
+		}
 		
 		
 		ArticleDAOJdbc ArticleDAO = new ArticleDAOJdbc();
