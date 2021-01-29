@@ -58,6 +58,9 @@
 
                 <input type="submit" value="Inscription" class="sansLabel" />
                 <br />
+                
+		 		<input type="button" value="Retour" onclick="history.go(-1)">
+				
             </fieldset>
         </form>
     </body>
