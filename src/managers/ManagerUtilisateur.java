@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import bo.BOUtilisateur;
 import dal.UtilisateurDAOJdbc;
 
-		
+
 public class ManagerUtilisateur {
 	
 	public BOUtilisateur validationConnection(String id, String mdp) throws Exception {
@@ -134,11 +134,6 @@ public class ManagerUtilisateur {
 		/*dal delete by Id*/
 	}
 	
-
-	Exception CREATION_MOTDEPASSE_PAS_IDENTIQUE = new Exception("20300");
-	Exception CREATION_PSEUDO_DEJA_CREE = new Exception("20301");
-	Exception CREATION_EMAIL_DEJA_CREE = new Exception("20302");
-
 	public BOUtilisateur trouverUtilisateur (int numero) {
 		BOUtilisateur user = null;
 		UtilisateurDAOJdbc c = new UtilisateurDAOJdbc();
@@ -152,10 +147,11 @@ public class ManagerUtilisateur {
 		
 		return user;
 	}
+	Exception CREATION_MOTDEPASSE_PAS_IDENTIQUE = new Exception("20300");
+	Exception CREATION_PSEUDO_DEJA_CREE = new Exception("20301");
+	Exception CREATION_EMAIL_DEJA_CREE = new Exception("20302");
 	
-	
-	
-	public void creationUtilisateur (BOUtilisateur user, String mdpConf) throws Exception {
+public void creationUtilisateur (BOUtilisateur user, String mdpConf) throws Exception {
 		
 		try {
 			if (!user.getMdp().equals(mdpConf)) { 
@@ -188,6 +184,7 @@ public class ManagerUtilisateur {
 		
 		
 	}
+	
 	
 	
 }
