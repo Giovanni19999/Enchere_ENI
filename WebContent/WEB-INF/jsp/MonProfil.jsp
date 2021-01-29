@@ -21,7 +21,7 @@
 	ville : ${sessionScope.utilisateur.ville}<br>
 	
 	<form action="${pageContext.request.contextPath}/profil/modifier" method="get">
-		<input type="submit" name="modifierrencheres" value="Modifier Profil">
+		<input type="submit" name="modifierprofil" value="Modifier Profil">
 	</form>
 					
 </body>
