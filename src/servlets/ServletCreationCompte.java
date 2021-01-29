@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bo.BOArticle;
 import bo.BOUtilisateur;
 import exceptions.BusinessException;
+import managers.ManagerArticle;
 import managers.ManagerUtilisateur;
 
 /**
@@ -54,8 +57,11 @@ public class ServletCreationCompte extends HttpServlet {
 		
 		try {
 			new ManagerUtilisateur().creationUtilisateur(utilisateur, confirmation);
+			
+			
 			RequestDispatcher rd=request.getRequestDispatcher("/retour/encheres");
 			if (rd != null ) {rd.forward(request, response);}
+			
 		} catch (Exception e) {
 			BusinessException exeption = new BusinessException();
 			String erreur=exeption.lecteurMessage(e.getMessage());

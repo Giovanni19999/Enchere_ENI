@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -12,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bo.BOArticle;
+import bo.BOCategorie;
 import bo.BOUtilisateur;
 import exceptions.BusinessException;
+import managers.ManagerArticle;
 import managers.ManagerUtilisateur;
 
 /**
@@ -79,8 +83,15 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 					}
 				}
 			}
-			
-			
+			ManagerArticle manager =new ManagerArticle();
+			ArrayList<BOArticle> article = null;
+			if (session.getAttribute("utilisateur")== null) {
+				article = manager.rechecheArticle("", "");
+				
+			} else {
+				article = manager.rechecheArticleCo("", "", (BOUtilisateur) session.getAttribute("utilisateur"));
+			}
+			request.setAttribute("article", article);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Encheres.jsp");
 			if(rd != null) {rd.forward(request, response);}
 
