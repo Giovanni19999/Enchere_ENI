@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bo.BOArticle;
 import bo.BOCategorie;
+import bo.BOUtilisateur;
+import managers.ManagerArticle;
 import managers.ManagerCategorie;
 
 /**
@@ -33,8 +36,10 @@ public class ServletRetourAccueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Encheres.jsp");
+		
 		HttpSession session = request.getSession();
+		ArrayList<BOArticle> article = null;
+		ManagerArticle manager = new ManagerArticle();
 		ManagerCategorie manCategorie = new ManagerCategorie();
 		ArrayList<BOCategorie> listCat = null;
 		try {
@@ -43,7 +48,17 @@ public class ServletRetourAccueil extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		if (session.getAttribute("utilisateur")== null) {
+			article = manager.rechecheArticle("", "");
+			
+		} else {
+			article = manager.rechecheArticleCo("", "", (BOUtilisateur) session.getAttribute("utilisateur"));
+		}
+		request.setAttribute("article", article);
 		session.setAttribute("Categories", listCat);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Encheres.jsp");
 		if(rd != null) {rd.forward(request, response);}
 	}
 

@@ -180,29 +180,31 @@ public class UtilisateurDAOJdbc {
 		}
 	}
 	
-	public void insertById(int id) throws SQLException {
+	public void insertById(BOUtilisateur user) throws SQLException {
 		try (Connection cnx = ConnectionProvider.getConnection()){
-			String sql = "INSERT into UTILISATEURS";
-			BOUtilisateur c = null;
+			String sql = "INSERT INTO UTILISATEURS( pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
-			PreparedStatement stmt = cnx.prepareStatement(sql);
-			stmt.setInt(1,id);
-			ResultSet rs = stmt.executeQuery();
-			rs.next();
-			c = new BOUtilisateur();
-			c.setPseudo("pseudo");
-			c.setNom("nom");
-			c.setPrenom("prenom");
-			c.setEmail("email");
-			c.setTelephone("telephone");
-			c.setRue("rue");
-			c.setCodePostal("codePostal");
-			c.setVille("ville");
-			c.setMdp("mdp");
+			
+			PreparedStatement stmt = cnx.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			stmt.setString(1,user.getPseudo());			
+			stmt.setString(2,user.getNom());
+			stmt.setString(3,user.getPrenom());
+			stmt.setString(4,user.getEmail());
+			stmt.setString(5,user.getTelephone());
+			stmt.setString(6,user.getRue());
+			stmt.setString(7,user.getCodePostal());
+			stmt.setString(8,user.getVille());	
+			stmt.setString(9,user.getMdp());
+			stmt.setInt(10,100);
+			stmt.setBoolean(11, false);
+			stmt.executeUpdate();
+			
 			
 		} catch(Exception e) {
 			new Exception("10200");
 		}
+		
 		
 	}
 

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,7 +8,9 @@
         <title>Inscription</title>
     </head>
     <body>
-   
+		 <p> <!-- Si l'utilisateur renseigne un mauvais identifiant / mdp, on affiche un message d'erreur. -->
+				<c:if test="${!empty requestScope.erreur}"> erreur : ${requestScope.erreur} </c:if>
+		</p>
         <form method="post" action="${pageContext.request.contextPath}/compte/creation">
             <fieldset>
                 <h1>Inscription</h1>
@@ -55,6 +58,9 @@
 
                 <input type="submit" value="Inscription" class="sansLabel" />
                 <br />
+                
+		 		<input type="button" value="Retour" onclick="history.go(-1)">
+				
             </fieldset>
         </form>
     </body>

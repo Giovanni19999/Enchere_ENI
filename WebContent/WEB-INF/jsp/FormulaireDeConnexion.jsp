@@ -24,5 +24,8 @@
 		<input type="checkbox" name="resterconnecter" value="resterconnecter" <c:if test="${!empty requestScope.user}">checked="checked" </c:if>>
 	</form>
 	<a href="${pageContext.request.contextPath}/compte/creation">Créer un compte</a>
+	<form>
+ 		<input type="button" value="Retour" onclick="history.go(-1)">
+	</form>
 </body>
 </html>

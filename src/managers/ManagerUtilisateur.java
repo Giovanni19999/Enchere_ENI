@@ -147,8 +147,43 @@ public class ManagerUtilisateur {
 		
 		return user;
 	}
+	Exception CREATION_MOTDEPASSE_PAS_IDENTIQUE = new Exception("20300");
+	Exception CREATION_PSEUDO_DEJA_CREE = new Exception("20301");
+	Exception CREATION_EMAIL_DEJA_CREE = new Exception("20302");
 	
-	
+public void creationUtilisateur (BOUtilisateur user, String mdpConf) throws Exception {
+		
+		try {
+			if (!user.getMdp().equals(mdpConf)) { 
+				throw CREATION_MOTDEPASSE_PAS_IDENTIQUE;
+			}
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		
+		UtilisateurDAOJdbc baseDonnee = new UtilisateurDAOJdbc();
+		try {
+			baseDonnee.selectByPseudo(user.getPseudo());
+			throw CREATION_PSEUDO_DEJA_CREE;
+		} catch (Exception e) {
+			if (e.getMessage().equals(CREATION_PSEUDO_DEJA_CREE.getMessage())) {
+				throw new Exception(e.getMessage());
+			}
+			try {
+				baseDonnee.selectByEmail(user.getEmail());
+				throw CREATION_EMAIL_DEJA_CREE;
+			} catch (Exception e2) {
+				if (e2.getMessage().equals(CREATION_EMAIL_DEJA_CREE.getMessage())) {
+					throw new Exception(e2.getMessage());
+				}
+				else {
+					baseDonnee.insertById(user);
+				}
+			}
+		}
+		
+		
+	}
 	
 	
 	
