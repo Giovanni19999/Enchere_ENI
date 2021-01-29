@@ -7,7 +7,7 @@
 <title>Liste d'enchères</title>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/jsp/fragments/Navigation.jspf" %>
 	<h1>Recherche</h1>
 		<ul>
 		
