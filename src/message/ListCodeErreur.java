@@ -24,6 +24,7 @@ public class ListCodeErreur {
 		CodeErreur code10100=new CodeErreur("10100", "Id inconnue pour l'update");
 		listeCode.add(3,code10100);
 		
+	
 		CodeErreur code11000=new CodeErreur("11000", "Erreur du selectAll");
 		listeCode.add(4,code11000);
 		
