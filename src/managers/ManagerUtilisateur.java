@@ -180,10 +180,13 @@ public class ManagerUtilisateur {
 				if (e2.getMessage().equals(CREATION_EMAIL_DEJA_CREE.getMessage())) {
 					throw new Exception(e2.getMessage());
 				}
+				else {
+					baseDonnee.insertById(user);
+				}
 			}
 		}
 		
-		baseDonnee.insert(user);
+		
 	}
 	
 	
